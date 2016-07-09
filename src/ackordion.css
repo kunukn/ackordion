@@ -1,0 +1,59 @@
+.ackordion {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 4px;
+  border: 2px solid black;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 1rem;
+}
+.ackordion > li + li {
+  border-top: 2px solid black;
+}
+.ackordion > li:not(.ackordion--active) > section > div {
+  max-height: 0px;
+}
+.ackordion > li > section {
+  font-size: inherit;
+  overflow: hidden;
+  display: block;
+}
+.ackordion > li > section > div {
+  padding: 0 1rem;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  will-change: max-height;
+}
+.ackordion > li > section > div:before, .ackordion > li > section > div:after {
+  content: '';
+}
+.ackordion > li > section > div:before {
+  display: block;
+  height: 1rem;
+}
+.ackordion > li > section > div:after {
+  display: block;
+  height: 1rem;
+}
+.ackordion > li > button {
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  background: #555;
+  color: white;
+  padding: 1rem;
+  text-transform: uppercase;
+  border: 0;
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ackordion > li > button:hover {
+  background: #444;
+}
+.ackordion > li > button:focus {
+  outline: none;
+  background: #333;
+}
