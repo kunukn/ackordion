@@ -13,3 +13,6 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Max-height is dynamically set and reset after the animation
 * Tabbing is supported
 * Vanilla JS
+ 
+# limitations
+* Currently only supports one accordion on the page
