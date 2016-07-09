@@ -12,7 +12,10 @@ window.ackordion = (function(window, document) {
     var log = console.log.bind(console),
         error = console.error.bind(console);
 
-    var root, items, headers, contents, previous,
+    var root, items = [],
+        headers = [],
+        contents = [],
+        previous,
         cssClassActive = 'ackordion--active';
 
     function expand(element) {
