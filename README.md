@@ -10,6 +10,6 @@ http://codepen.io/kunukn/full/zBEEEq/
 # features
 * CSS transition on dynamically calculated height value
 * Clean simple html structure with minimum CSS class usage 
-* Max-height is dynamically calculated and reset after the animation
+* Max-height is dynamically set and reset after the animation
 * Tabbing is supported
 * Vanilla JS
