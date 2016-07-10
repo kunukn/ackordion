@@ -11,7 +11,7 @@
 
 .ackordion-fix-safari-bug {
     transition: 0 !important;
-    /* http://stackoverflow.com/questions/27806229/css-max-height-transition-double-animation-bug-in-webkit */
+    /* http://stackoverflow.com/q/27806229/815507 */
 }
 
 .ackordion > li + li {

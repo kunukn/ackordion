@@ -70,7 +70,7 @@ window.ackordion = (function(window, document, console) {
             self.autoClosePrevious = false;
 
         self.contents = qsa('section > div', self.root);
-        
+
         self.contents.forEach(function(content) {
             //content.style.maxHeight = '0px';
         });
@@ -104,8 +104,7 @@ window.ackordion = (function(window, document, console) {
                     var height = getComputedStyle(event.srcElement).height;
 
                     // Using this technique because Safari has double animation bug when max-height is later set again
-                    // http://stackoverflow.com/questions/27806229/css-max-height-transition-double-animation-bug-in-webkit
-
+                    // http://stackoverflow.com/q/27806229/815507
                     element.classList.add('ackordion-fix-safari-bug');
 
                     setTimeout(function() {
