@@ -18,7 +18,7 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Vanilla JS
 * Multiple accordions supported
 
-# Supported browsers
+# supported browsers
 * Chrome - latest 2 versions
 * Firefox - latest 2 versions
 * Safari on desktop and iPhone, iPad - latest 2 versions
@@ -32,5 +32,5 @@ Safari browser and usage of transitionend.
 set `ackordion.isTransitionEndDisabled = true` for supporting Safari browser. The max-height value doesn't get cleared.
 This has effect on rezising browser width or rotating devices where the content is fixed in height until toggling the content again.
 
-# License
+# license
 MIT
