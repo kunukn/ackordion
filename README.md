@@ -28,6 +28,9 @@ http://codepen.io/kunukn/full/zBEEEq/
 
 
 # known bugs
+Safari browser and usage of transitionend. 
+set `ackordion.isTransitionEndDisabled = true` for supporting Safari browser. The max-height value doesn't get cleared.
+This has effect on rezising browser width or rotating devices where the content is fixed in height until toggling the content again.
 
 # License
 MIT
