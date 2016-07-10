@@ -19,11 +19,13 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Multiple accordions supported
 
 # Supported browsers
-Chrome - latest 2 versions
-Safari on desktop and iPhone, iPad - latest 2 versions
-IE11
-Edge - latest 2 versions
-Android Chrome - latest 2 versions
+* Chrome - latest 2 versions
+* Firefox - latest 2 versions
+* Safari on desktop and iPhone, iPad - latest 2 versions
+* IE11
+* Edge - latest 2 versions
+* Android Chrome - latest 2 versions
+
 
 # known bugs
 
