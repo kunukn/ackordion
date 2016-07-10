@@ -10,22 +10,23 @@ window.ackordion = (function(window, document, console) {
     }
 
     var log = console.log.bind(console),
-        error = console.error.bind(console);
-
-    var cssClassActive = 'ackordion--active';
-    var dataAckordion = 'data-ackordion';
-    var accordionIndex = 1;
-    var accordions = [];
-    var transitionEndVendorPrefix = getTransitionEndVendorPrefixAsString();
+        error = console.error.bind(console),
+        cssClassActive = 'ackordion--active',
+        dataAckordion = 'data-ackordion',
+        accordionIndex = 1,
+        accordions = [],
+        transitionEndVendorPrefix = getTransitionEndVendorPrefixAsString();
 
     function getTransitionEndVendorPrefixAsString() {
-        var t, el = document.createElement('div')
-        var transitions = {
-            'transition': 'transitionend',
-            'OTransition': 'oTransitionEnd',
-            'MozTransition': 'transitionend',
-            'WebkitTransition': 'webkitTransitionEnd',
-        }
+        var t,
+            el = document.createElement('div'),
+            transitions = {
+                'transition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd',
+            };
+
         for (t in transitions) {
             if (el.style[t] !== undefined) {
                 return transitions[t];
@@ -72,7 +73,8 @@ window.ackordion = (function(window, document, console) {
         self.contents = qsa('section > div', self.root);
 
         self.contents.forEach(function(content) {
-            //content.style.maxHeight = '0px';
+            // not used, css is used for this instead
+            // content.style.maxHeight = '0px';
         });
 
         if (self.transition) {
@@ -122,7 +124,6 @@ window.ackordion = (function(window, document, console) {
         var BCR = element.getBoundingClientRect();
         element.style.maxHeight = '0px';
 
-
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
@@ -150,8 +151,10 @@ window.ackordion = (function(window, document, console) {
 
         element.style.maxHeight = height + 'px';
 
+        /*
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+        */
 
         element.offsetHeight; // reflow
         element.classList.remove('ackordion-fix-safari-bug');
@@ -162,10 +165,11 @@ window.ackordion = (function(window, document, console) {
     }
 
     function toggle(element, event) {
-        var li = element.parentNode;
-        var root = li.parentNode;
-        var accordionIndex = +root.dataset.ackordion;
-        var accordion = accordions[accordionIndex];
+        var li = element.parentNode,
+            root = li.parentNode,
+            accordionIndex = +root.dataset.ackordion,
+            accordion = accordions[accordionIndex];
+
         li.classList.toggle(cssClassActive);
 
         var section = element.nextElementSibling,
@@ -186,13 +190,16 @@ window.ackordion = (function(window, document, console) {
             collapse(content);
         }
 
-        if (accordion) accordions[accordionIndex].previous = li;
+        // update previous
+        if (accordion)
+            accordions[accordionIndex].previous = li;
     }
 
 
     function clearPrevious(ackordionId) {
-        var root = document.getElementById(ackordionId);
-        var index = +root.dataset.ackordion;
+        var root = document.getElementById(ackordionId),
+            index = +root.dataset.ackordion;
+        
         if (index) {
             var accordion = accordions[index];
             if (accordion) {
@@ -200,11 +207,12 @@ window.ackordion = (function(window, document, console) {
                 return true;
             }
         }
+
         return false;
     }
 
     function init(config) {
-        var accordion = new Accordion(config);
+        new Accordion(config);
     }
 
     return {
