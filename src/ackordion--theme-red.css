@@ -1,0 +1,22 @@
+
+.ackordion--theme-red > li > button {
+  background: #FF5722;
+}
+.ackordion--theme-red > li > button:hover {
+  background: #ff4409;
+}
+.ackordion--theme-red > li > button:focus {
+  background: #ee3900;
+}
+.ackordion--theme-red > li > section > div {
+  background: -webkit-linear-gradient(270deg, rgba(255, 87, 34, 0.1), white);
+  background: linear-gradient(180deg, rgba(255, 87, 34, 0.1), white);
+}
+.ackordion--theme-red > li > section > div p {
+  margin: 0;
+  padding: 0;
+}
+.ackordion--theme-red > li > section > div p::first-letter {
+  font-size: 200%;
+  color: #FF5722;
+}

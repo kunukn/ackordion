@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="ackordion.css">
     <link rel="stylesheet" href="ackordion--theme-green.css">
     <link rel="stylesheet" href="ackordion--theme-blue.css">
+    <link rel="stylesheet" href="ackordion--theme-red.css">
     <style>
+    body {
+        font-family: sans-serif;
+        min-height: 2000px;
+    }
+    
     h1 {
         text-align: center;
     }
@@ -18,11 +24,12 @@
 
 <body>
     <h1>First</h1>
-    <ul class="ackordion" id="js-ackordion">
+    <ul class="ackordion" id="ackordion-1">
         <li>
             <button onclick="ackordion.toggle(this,event)">title 1</button>
             <section>
-                <div>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
+                <div>
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
             </section>
         </li>
         <li>
@@ -40,7 +47,7 @@
         </li>
     </ul>
     <h1>Second</h1>
-    <ul class="ackordion ackordion--theme-green" id="js-ackordion-2">
+    <ul class="ackordion ackordion--theme-green" id="ackordion-2">
         <li>
             <button onclick="ackordion.toggle(this,event)">title 1</button>
             <section>
@@ -61,16 +68,42 @@
             </section>
         </li>
     </ul>
+    <h1>Third</h1>
+    <ul class="ackordion ackordion--theme-red" id="ackordion-3">
+        <li>
+            <button onclick="ackordion.toggle(this,event)">title 1</button>
+            <section>
+                <div>
+                    <p>
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                    </p>
+                </div>
+            </section>
+        </li>
+        <li>
+            <button onclick="ackordion.toggle(this,event)">title 2</button>
+            <section>
+                <div>
+                    <p>
+                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+                    </p>
+                </div>
+            </section>
+        </li>
+    </ul>
+    
     <script src="ackordion.js"></script>
     <script>
     ackordion.init({
-        id: 'js-ackordion',
-        resetMaxHeightAfterTransitionEnd: true,
+        id: 'ackordion-1',
     });
     ackordion.init({
-        id: 'js-ackordion-2',
-        duration: '900ms',
-        resetMaxHeightAfterTransitionEnd: true,
+        id: 'ackordion-2',
+        duration: '600ms',
+    });
+    ackordion.init({
+        id: 'ackordion-3',
+        autoClosePrevious: false,
     });
     </script>
 </body>

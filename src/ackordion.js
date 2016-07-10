@@ -27,10 +27,12 @@ window.ackordion = (function(window, document, console) {
         var self = this;
         self.id = accordionId;
         self.root;
-        self.items = [];
-        self.headers = [];
         self.contents = [];
         self.previous;
+        self.autoClosePrevious = true;
+        if (config.autoClosePrevious === false)
+            self.autoClosePrevious = false;
+
         self.hasInit = false;
 
         if (!self.hasInit) {
@@ -47,8 +49,7 @@ window.ackordion = (function(window, document, console) {
             error('ackordion error - component not found in html');
             return;
         }
-        self.items = qsa('li', self.root);
-        self.headers = qsa('li > button', self.root);
+
         self.contents = qsa('section > div', self.root);
 
         if (config && config.duration) {
@@ -57,23 +58,25 @@ window.ackordion = (function(window, document, console) {
             });
         }
 
-        if (config && config.resetMaxHeightAfterTransitionEnd) {
-            self.contents.forEach(function(content) {
-                content.addEventListener('transitionend', function(event) {
-                    content.style.maxHeight = ''; // reset
-                }, false);
-            });
-        }
-
-
-      //  self.root.setAttribute(dataAckordion, accordionId);
-        self.root.dataset.ackordion = accordionId+'';
+        self.root.dataset.ackordion = accordionId + '';
 
         accordions[accordionId] = self;
         accordionId++;
     }
 
     function expand(element) {
+
+        function transitionEnd(event) {
+            if (event.propertyName == 'max-height') {
+               // log('transitionEnd');
+                element.style.maxHeight = 'none'
+                element.removeEventListener('transitionend', transitionEnd, false)
+            }
+        }
+
+        element.addEventListener('transitionend', transitionEnd, false);
+
+
         element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect();
         element.style.maxHeight = '0px';
@@ -82,9 +85,8 @@ window.ackordion = (function(window, document, console) {
     }
 
     function collapse(element) {
-        element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect(),
-            height = BCR.height ? BCR.height : 1;
+            height = BCR.height;
         element.style.maxHeight = height + 'px';
         element.offsetHeight; // reflow
         element.style.maxHeight = '0px';
@@ -96,13 +98,13 @@ window.ackordion = (function(window, document, console) {
         var root = li.parentNode;
         var ackordionId = +root.dataset.ackordion;
         var accordion = accordions[ackordionId];
-        li.classList.toggle(cssClassActive);        
+        li.classList.toggle(cssClassActive);
 
         var section = element.nextElementSibling,
             content = section.firstElementChild,
             BCR;
 
-        if (accordion.previous && li !== accordion.previous) {
+        if (accordion && accordion.autoClosePrevious && accordion.previous && li !== accordion.previous) {
             if (accordion.previous.classList.contains(cssClassActive)) {
                 var previousContent = qs('section > div', accordion.previous);
                 collapse(previousContent);
@@ -116,7 +118,7 @@ window.ackordion = (function(window, document, console) {
             collapse(content);
         }
 
-        accordions[ackordionId].previous = li;
+        if (accordion) accordions[ackordionId].previous = li;
     }
 
 
