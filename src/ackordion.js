@@ -19,22 +19,19 @@ window.ackordion = (function(window, document, console) {
     var transitionEndVendorPrefix = getTransitionEndVendorPrefixAsString();
 
     function getTransitionEndVendorPrefixAsString() {
-        var el = document.createElement('div')
-
-        var transEndEventNames = {
-            WebkitTransition: 'webkitTransitionEnd',
-            MozTransition: 'transitionend',
-            OTransition: 'oTransitionEnd otransitionend',
-            transition: 'transitionend'
+        var t, el = document.createElement('div')
+        var transitions = {
+            'transition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'MozTransition': 'transitionend',
+            'WebkitTransition': 'webkitTransitionEnd',
         }
-
-        for (var name in transEndEventNames) {
-            if (el.style[name] !== undefined) {
-                return transEndEventNames[name];
+        for (t in transitions) {
+            if (el.style[t] !== undefined) {
+                return transitions[t];
             }
         }
-
-        return false;
+        return 'transitionend';
     }
 
     var Accordion = function(config) {
@@ -59,9 +56,7 @@ window.ackordion = (function(window, document, console) {
         self.contents = [];
         self.previous; // previous toggled element
         self.autoClosePrevious = true;
-
-        if (config.autoClosePrevious === false)
-            self.autoClosePrevious = false;
+        self.transition = config.transition || '';
 
         if (config && config.id) {
             self.root = document.getElementById(config.id);
@@ -71,7 +66,14 @@ window.ackordion = (function(window, document, console) {
             return;
         }
 
+        if (config.autoClosePrevious === false)
+            self.autoClosePrevious = false;
+
         self.contents = qsa('section > div', self.root);
+        self.contents.forEach(function(content) {
+            content.style.maxHeight = '0px';
+            content.style.transition = self.transition;
+        });
 
         if (config && config.duration) {
             self.contents.forEach(function(content) {
@@ -88,38 +90,68 @@ window.ackordion = (function(window, document, console) {
     function expand(element) {
 
         function transitionEnd(event) {
+
             if (event.propertyName == 'max-height') {
+
                 if (element.style.maxHeight !== '0px') {
+
+                    var height = getComputedStyle(event.srcElement).height;
+
+                    // Using this technique because Safari has double animation bug when max-height is later set again
+                    // http://stackoverflow.com/questions/27806229/css-max-height-transition-double-animation-bug-in-webkit
+
+                    element.classList.add('ackordion-fix-safari-bug');
+
                     setTimeout(function() {
-                        element.style.maxHeight = 'none' // sadly this causes Safari to flicker
-                    });
+                        element.style.maxHeight = 'none';
+                        setTimeout(function() {
+                            element.classList.remove('ackordion-fix-safari-bug');
+                        }, 10);
+                    }, 0);
                 }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
         }
 
         element.style.maxHeight = 'none';
-
         var BCR = element.getBoundingClientRect();
         element.style.maxHeight = '0px';
-        element.offsetHeight; // reflow
 
-        element.style.maxHeight = BCR.height + 'px';
+        element.offsetHeight; // reflow
 
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+
+        element.style.maxHeight = BCR.height + 'px';
     }
 
     function collapse(element) {
+
+        function transitionEnd(event) {
+            /*
+            if (event.propertyName == 'max-height') {
+                  if (element.style.maxHeight === '0px') {
+                  }
+                  element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
+            }
+            */
+        }
+
+        element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect(),
             height = BCR.height === 0 ? 1 : BCR.height;
+
         element.style.maxHeight = height + 'px';
+
         element.offsetHeight; // reflow
+
+        if (!ackordion.isTransitionEndDisabled)
+            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+
         element.style.maxHeight = '0px';
     }
 
     function toggle(element, event) {
-
         var li = element.parentNode;
         var root = li.parentNode;
         var accordionIndex = +root.dataset.ackordion;

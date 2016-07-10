@@ -9,12 +9,17 @@
     font-size: 1rem;
 }
 
+.ackordion-fix-safari-bug {
+    transition: 0 !important;
+    /* http://stackoverflow.com/questions/27806229/css-max-height-transition-double-animation-bug-in-webkit */
+}
+
 .ackordion > li + li {
     border-top: 2px solid black;
 }
 
 .ackordion > li:not(.ackordion--active) > section > div {
-    max-height: 0px;
+    //max-height: 0px;
 }
 
 .ackordion > li > section {
@@ -25,9 +30,7 @@
 
 .ackordion > li > section > div {
     padding: 0 1rem;
-    -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
     transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
-    -webkit-transform: translateZ(0);
     transform: translateZ(0);
     will-change: max-height;
     -webkit-backface-visibility: hidden;
@@ -51,7 +54,6 @@
 .ackordion > li > button {
     -webkit-tap-highlight-color: transparent;
     width: 100%;
-    -webkit-transition: cubic-bezier(0, 0, .3, 1) 200ms;
     transition: cubic-bezier(0, 0, .3, 1) 200ms;
     background: #444;
     color: white;
