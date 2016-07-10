@@ -23,6 +23,7 @@
   padding: 0 1rem;
   -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
   transition: cubic-bezier(0,0,.3,1) 200ms;
+  transform: translateZ(0);
   will-change: max-height;
 }
 .ackordion > li > section > div:before, .ackordion > li > section > div:after {
