@@ -1,6 +1,9 @@
 # ackordion
 VanillaJS mobile friendly accordion library
 
+# version
+0.01
+
 # about
 Accordion library for fast mobile device rendering. 
 
@@ -15,5 +18,8 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Vanilla JS
 * Multiple accordions supported
  
+# known bugs
+Safari - wierd double collapsing
+
 # License
 MIT
