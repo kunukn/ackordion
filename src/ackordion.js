@@ -70,10 +70,16 @@ window.ackordion = (function(window, document, console) {
             self.autoClosePrevious = false;
 
         self.contents = qsa('section > div', self.root);
+        
         self.contents.forEach(function(content) {
-            content.style.maxHeight = '0px';
-            content.style.transition = self.transition;
+            //content.style.maxHeight = '0px';
         });
+
+        if (self.transition) {
+            self.contents.forEach(function(content) {
+                content.style.transition = self.transition;
+            });
+        }
 
         if (config && config.duration) {
             self.contents.forEach(function(content) {
@@ -117,10 +123,11 @@ window.ackordion = (function(window, document, console) {
         var BCR = element.getBoundingClientRect();
         element.style.maxHeight = '0px';
 
-        element.offsetHeight; // reflow
 
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+
+        element.offsetHeight; // reflow
 
         element.style.maxHeight = BCR.height + 'px';
     }
@@ -128,14 +135,15 @@ window.ackordion = (function(window, document, console) {
     function collapse(element) {
 
         function transitionEnd(event) {
-            /*
             if (event.propertyName == 'max-height') {
-                  if (element.style.maxHeight === '0px') {
-                  }
-                  element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
+                if (element.style.maxHeight === '0px') {
+                    // not needed yet..
+                }
+                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
-            */
         }
+
+        element.classList.add('ackordion-fix-safari-bug');
 
         element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect(),
@@ -143,12 +151,15 @@ window.ackordion = (function(window, document, console) {
 
         element.style.maxHeight = height + 'px';
 
-        element.offsetHeight; // reflow
-
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
-        element.style.maxHeight = '0px';
+        element.offsetHeight; // reflow
+        element.classList.remove('ackordion-fix-safari-bug');
+
+        setTimeout(function() {
+            element.style.maxHeight = '0px';
+        }, 0);
     }
 
     function toggle(element, event) {

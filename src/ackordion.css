@@ -19,7 +19,7 @@
 }
 
 .ackordion > li:not(.ackordion--active) > section > div {
-    //max-height: 0px;
+    max-height: 0px;
 }
 
 .ackordion > li > section {
