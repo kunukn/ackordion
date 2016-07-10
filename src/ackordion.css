@@ -21,8 +21,8 @@
 }
 .ackordion > li > section > div {
   padding: 0 1rem;
-  -webkit-transition: 200ms;
-  transition: 200ms;
+  -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
+  transition: cubic-bezier(0,0,.3,1) 200ms;
   will-change: max-height;
 }
 .ackordion > li > section > div:before, .ackordion > li > section > div:after {
@@ -39,8 +39,8 @@
 .ackordion > li > button {
   -webkit-tap-highlight-color: transparent;
   width: 100%;
-  -webkit-transition: 200ms;
-  transition: 200ms;
+  -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
+  transition: cubic-bezier(0,0,.3,1) 200ms;
   background: #555;
   color: white;
   padding: 1rem;
