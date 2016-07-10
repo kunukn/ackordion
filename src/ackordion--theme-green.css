@@ -1,0 +1,13 @@
+.ackordion--theme-green > li > button {
+  background: #689F38;
+}
+.ackordion--theme-green > li > button:hover {
+  background: #5c8c31;
+}
+.ackordion--theme-green > li > button:focus {
+  background: #4f792b;
+}
+.ackordion--theme-green > li > section > div {
+  background: #222;
+  color: white;
+}

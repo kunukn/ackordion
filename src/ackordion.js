@@ -1,5 +1,5 @@
 ;
-window.ackordion = (function(window, document) {
+window.ackordion = (function(window, document, console) {
 
     function qs(expr, context) {
         return (context || document).querySelector(expr);
@@ -130,4 +130,4 @@ window.ackordion = (function(window, document) {
         init: init,
     };
 
-})(window, document, undefined);
+})(window, window.document, window.console, undefined);
