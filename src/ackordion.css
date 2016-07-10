@@ -42,7 +42,7 @@
   width: 100%;
   -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
   transition: cubic-bezier(0,0,.3,1) 200ms;
-  background: #555;
+  background: #444;
   color: white;
   padding: 1rem;
   text-transform: uppercase;
@@ -52,9 +52,9 @@
   cursor: pointer;
 }
 .ackordion > li > button:hover {
-  background: #444;
+  background: #333;
 }
 .ackordion > li > button:focus {
   outline: none;
-  background: #333;
+  background: #222;
 }
