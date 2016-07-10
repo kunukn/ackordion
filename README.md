@@ -2,7 +2,7 @@
 VanillaJS mobile friendly accordion library
 
 # version
-0.01
+alpha 0.02
 
 # about
 Accordion library for fast mobile device rendering. 
@@ -17,9 +17,17 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Tabbing is supported
 * Vanilla JS
 * Multiple accordions supported
- 
+
+# Supported browsers
+* Chrome - latest 2 versions
+* Firefox - latest 2 versions
+* Safari on desktop and iPhone, iPad - latest 2 versions
+* IE11
+* Edge - latest 2 versions
+* Android Chrome - latest 2 versions
+
+
 # known bugs
-Safari - wierd double collapsing
 
 # License
 MIT
