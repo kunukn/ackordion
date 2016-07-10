@@ -14,7 +14,7 @@ window.ackordion = (function(window, document, console) {
 
     var cssClassActive = 'ackordion--active';
     var dataAckordion = 'data-ackordion';
-    var accordionId = 1;
+    var accordionIndex = 1;
     var accordions = [];
 
     var Accordion = function(config) {
@@ -25,7 +25,7 @@ window.ackordion = (function(window, document, console) {
         }
 
         var self = this;
-        self.id = accordionId;
+        self.id = accordionIndex;
         self.root;
         self.contents = [];
         self.previous;
@@ -58,24 +58,24 @@ window.ackordion = (function(window, document, console) {
             });
         }
 
-        self.root.dataset.ackordion = accordionId + '';
+        self.root.dataset.ackordion = accordionIndex + '';
 
-        accordions[accordionId] = self;
-        accordionId++;
+        accordions[accordionIndex] = self;
+        accordionIndex++;
     }
 
     function expand(element) {
 
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
-               // log('transitionEnd');
-                element.style.maxHeight = 'none'
+                if (element.style.maxHeight !== '0px') {
+                    element.style.maxHeight = 'none'
+                }
                 element.removeEventListener('transitionend', transitionEnd, false)
             }
         }
 
         element.addEventListener('transitionend', transitionEnd, false);
-
 
         element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect();
@@ -96,8 +96,8 @@ window.ackordion = (function(window, document, console) {
 
         var li = element.parentNode;
         var root = li.parentNode;
-        var ackordionId = +root.dataset.ackordion;
-        var accordion = accordions[ackordionId];
+        var accordionIndex = +root.dataset.ackordion;
+        var accordion = accordions[accordionIndex];
         li.classList.toggle(cssClassActive);
 
         var section = element.nextElementSibling,
@@ -118,10 +118,22 @@ window.ackordion = (function(window, document, console) {
             collapse(content);
         }
 
-        if (accordion) accordions[ackordionId].previous = li;
+        if (accordion) accordions[accordionIndex].previous = li;
     }
 
 
+    function clearPrevious(ackordionId) {
+        var root = document.getElementById(ackordionId);
+        var index = +root.dataset.ackordion;
+        if (index) {
+            var accordion = accordions[index];
+            if (accordion) {
+                accordions[index].previous = undefined;
+                return true;
+            }
+        }
+        return false;
+    }
 
     function init(config) {
         var accordion = new Accordion(config);
@@ -130,6 +142,7 @@ window.ackordion = (function(window, document, console) {
     return {
         toggle: toggle,
         init: init,
+        clearPrevious: clearPrevious
     };
 
 })(window, window.document, window.console, undefined);
