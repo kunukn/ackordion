@@ -39,28 +39,29 @@ window.ackordion = (function(window, document, console) {
 
     var Accordion = function(config) {
 
+        var self = this;
+
         if (!config) {
             error('ackordion error - you must provide a config');
             return;
         }
 
-        var self = this;
-        self.id = accordionIndex;
-        self.root;
-        self.contents = [];
-        self.previous;
-        self.autoClosePrevious = true;
-        if (config.autoClosePrevious === false)
-            self.autoClosePrevious = false;
-
         self.hasInit = false;
-
         if (!self.hasInit) {
             self.hasInit = true;
         } else {
             error('ackordion error - you can only call init once per id');
             return;
         }
+
+        self.id = accordionIndex;
+        self.root; // component element root
+        self.contents = [];
+        self.previous; // previous toggled element
+        self.autoClosePrevious = true;
+
+        if (config.autoClosePrevious === false)
+            self.autoClosePrevious = false;
 
         if (config && config.id) {
             self.root = document.getElementById(config.id);
@@ -89,13 +90,13 @@ window.ackordion = (function(window, document, console) {
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
                 if (element.style.maxHeight !== '0px') {
-                  element.style.maxHeight = 'none'
+                    setTimeout(function() {
+                        element.style.maxHeight = 'none' // sadly this causes Safari to flicker
+                    });
                 }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
         }
-
-        element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
         element.style.maxHeight = 'none';
 
@@ -104,11 +105,14 @@ window.ackordion = (function(window, document, console) {
         element.offsetHeight; // reflow
 
         element.style.maxHeight = BCR.height + 'px';
+
+        if (!ackordion.isTransitionEndDisabled)
+            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
     }
 
     function collapse(element) {
         var BCR = element.getBoundingClientRect(),
-            height = BCR.height == 0 ? 1 : BCR.height;
+            height = BCR.height === 0 ? 1 : BCR.height;
         element.style.maxHeight = height + 'px';
         element.offsetHeight; // reflow
         element.style.maxHeight = '0px';
@@ -164,7 +168,8 @@ window.ackordion = (function(window, document, console) {
     return {
         toggle: toggle,
         init: init,
-        clearPrevious: clearPrevious
+        clearPrevious: clearPrevious,
+        isTransitionEndDisabled: false,
     };
 
 })(window, window.document, window.console, undefined);

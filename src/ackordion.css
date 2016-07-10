@@ -1,61 +1,73 @@
 .ackordion {
-  width: 100%;
-  max-width: 700px;
-  border-radius: 4px;
-  border: 2px solid black;
-  list-style-type: none;
-  margin: 0 auto;
-  padding: 0;
-  font-size: 1rem;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 4px;
+    border: 2px solid black;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 1rem;
 }
+
 .ackordion > li + li {
-  border-top: 2px solid black;
+    border-top: 2px solid black;
 }
+
 .ackordion > li:not(.ackordion--active) > section > div {
-  max-height: 0px;
+    max-height: 0px;
 }
+
 .ackordion > li > section {
-  font-size: inherit;
-  overflow: hidden;
-  display: block;
+    font-size: inherit;
+    overflow: hidden;
+    display: block;
 }
+
 .ackordion > li > section > div {
-  padding: 0 1rem;
-  -webkit-transition: max-height cubic-bezier(0,0,.3,1) 160ms;
-  transition: max-height cubic-bezier(0,0,.3,1) 160ms;
-  transform: translateZ(0);
-  will-change: max-height;
-  -webkit-backface-visibility: hidden;
+    padding: 0 1rem;
+    -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
+    transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: max-height;
+    -webkit-backface-visibility: hidden;
 }
-.ackordion > li > section > div:before, .ackordion > li > section > div:after {
-  content: '';
-}
-.ackordion > li > section > div:before {
-  display: block;
-  height: 1rem;
-}
+
+.ackordion > li > section > div:before,
 .ackordion > li > section > div:after {
-  display: block;
-  height: 1rem;
+    content: '';
 }
+
+.ackordion > li > section > div:before {
+    display: block;
+    height: 1rem;
+}
+
+.ackordion > li > section > div:after {
+    display: block;
+    height: 1rem;
+}
+
 .ackordion > li > button {
-  -webkit-tap-highlight-color: transparent;
-  width: 100%;
-  -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
-  transition: cubic-bezier(0,0,.3,1) 200ms;
-  background: #444;
-  color: white;
-  padding: 1rem;
-  text-transform: uppercase;
-  border: 0;
-  font-size: inherit;
-  text-align: left;
-  cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+    -webkit-transition: cubic-bezier(0, 0, .3, 1) 200ms;
+    transition: cubic-bezier(0, 0, .3, 1) 200ms;
+    background: #444;
+    color: white;
+    padding: 1rem;
+    text-transform: uppercase;
+    border: 0;
+    font-size: inherit;
+    text-align: left;
+    cursor: pointer;
 }
+
 .ackordion > li > button:hover {
-  background: #333;
+    background: #333;
 }
+
 .ackordion > li > button:focus {
-  outline: none;
-  background: #222;
+    outline: none;
+    background: #222;
 }
