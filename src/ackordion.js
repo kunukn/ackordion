@@ -16,6 +16,26 @@ window.ackordion = (function(window, document, console) {
     var dataAckordion = 'data-ackordion';
     var accordionIndex = 1;
     var accordions = [];
+    var transitionEndVendorPrefix = getTransitionEndVendorPrefixAsString();
+
+    function getTransitionEndVendorPrefixAsString() {
+        var el = document.createElement('div')
+
+        var transEndEventNames = {
+            WebkitTransition: 'webkitTransitionEnd',
+            MozTransition: 'transitionend',
+            OTransition: 'oTransitionEnd otransitionend',
+            transition: 'transitionend'
+        }
+
+        for (var name in transEndEventNames) {
+            if (el.style[name] !== undefined) {
+                return transEndEventNames[name];
+            }
+        }
+
+        return false;
+    }
 
     var Accordion = function(config) {
 
@@ -69,24 +89,26 @@ window.ackordion = (function(window, document, console) {
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
                 if (element.style.maxHeight !== '0px') {
-                    element.style.maxHeight = 'none'
+                  element.style.maxHeight = 'none'
                 }
-                element.removeEventListener('transitionend', transitionEnd, false)
+                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
         }
 
-        element.addEventListener('transitionend', transitionEnd, false);
+        element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
         element.style.maxHeight = 'none';
+
         var BCR = element.getBoundingClientRect();
         element.style.maxHeight = '0px';
         element.offsetHeight; // reflow
+
         element.style.maxHeight = BCR.height + 'px';
     }
 
     function collapse(element) {
         var BCR = element.getBoundingClientRect(),
-            height = BCR.height;
+            height = BCR.height == 0 ? 1 : BCR.height;
         element.style.maxHeight = height + 'px';
         element.offsetHeight; // reflow
         element.style.maxHeight = '0px';

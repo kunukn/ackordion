@@ -7,9 +7,6 @@
   margin: 0 auto;
   padding: 0;
   font-size: 1rem;
-  *, *:before, *:after{
-    box-sizing: border-box;
-  }
 }
 .ackordion > li + li {
   border-top: 2px solid black;
@@ -24,10 +21,11 @@
 }
 .ackordion > li > section > div {
   padding: 0 1rem;
-  -webkit-transition: cubic-bezier(0,0,.3,1) 200ms;
-  transition: cubic-bezier(0,0,.3,1) 160ms;
+  -webkit-transition: max-height cubic-bezier(0,0,.3,1) 160ms;
+  transition: max-height cubic-bezier(0,0,.3,1) 160ms;
   transform: translateZ(0);
   will-change: max-height;
+  -webkit-backface-visibility: hidden;
 }
 .ackordion > li > section > div:before, .ackordion > li > section > div:after {
   content: '';
