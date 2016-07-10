@@ -1,22 +1,77 @@
 ;
 window.ackordion = (function(window, document) {
 
-    function $(expr, context) {
+    function qs(expr, context) {
         return (context || document).querySelector(expr);
     }
 
-    function $$(expr, context) {
+    function qsa(expr, context) {
         return [].slice.call((context || document).querySelectorAll(expr), 0);
     }
 
     var log = console.log.bind(console),
         error = console.error.bind(console);
 
-    var root, items = [],
-        headers = [],
-        contents = [],
-        previous,
-        cssClassActive = 'ackordion--active';
+    var cssClassActive = 'ackordion--active';
+    var dataAckordion = 'data-ackordion';
+    var accordionId = 1;
+    var accordions = [];
+
+    var Accordion = function(config) {
+
+        if (!config) {
+            error('ackordion error - you must provide a config');
+            return;
+        }
+
+        var self = this;
+        self.id = accordionId;
+        self.root;
+        self.items = [];
+        self.headers = [];
+        self.contents = [];
+        self.previous;
+        self.hasInit = false;
+
+        if (!self.hasInit) {
+            self.hasInit = true;
+        } else {
+            error('ackordion error - you can only call init once per id');
+            return;
+        }
+
+        if (config && config.id) {
+            self.root = document.getElementById(config.id);
+        }
+        if (!self.root) {
+            error('ackordion error - component not found in html');
+            return;
+        }
+        self.items = qsa('li', self.root);
+        self.headers = qsa('li > button', self.root);
+        self.contents = qsa('section > div', self.root);
+
+        if (config && config.duration) {
+            self.contents.forEach(function(content) {
+                content.style.transitionDuration = config.duration;
+            });
+        }
+
+        if (config && config.resetMaxHeightAfterTransitionEnd) {
+            self.contents.forEach(function(content) {
+                content.addEventListener('transitionend', function(event) {
+                    content.style.maxHeight = ''; // reset
+                }, false);
+            });
+        }
+
+
+      //  self.root.setAttribute(dataAckordion, accordionId);
+        self.root.dataset.ackordion = accordionId+'';
+
+        accordions[accordionId] = self;
+        accordionId++;
+    }
 
     function expand(element) {
         element.style.maxHeight = 'none';
@@ -38,17 +93,20 @@ window.ackordion = (function(window, document) {
     function toggle(element, event) {
 
         var li = element.parentNode;
-        li.classList.toggle(cssClassActive);
+        var root = li.parentNode;
+        var ackordionId = +root.dataset.ackordion;
+        var accordion = accordions[ackordionId];
+        li.classList.toggle(cssClassActive);        
 
         var section = element.nextElementSibling,
             content = section.firstElementChild,
             BCR;
 
-        if (previous && li !== previous) {
-            if (previous.classList.contains(cssClassActive)) {
-                var previousContent = $('section > div', previous);
+        if (accordion.previous && li !== accordion.previous) {
+            if (accordion.previous.classList.contains(cssClassActive)) {
+                var previousContent = qs('section > div', accordion.previous);
                 collapse(previousContent);
-                previous.classList.remove(cssClassActive);
+                accordion.previous.classList.remove(cssClassActive);
             }
         }
 
@@ -58,45 +116,13 @@ window.ackordion = (function(window, document) {
             collapse(content);
         }
 
-        previous = li;
+        accordions[ackordionId].previous = li;
     }
 
-    var hasInit = false;
+
 
     function init(config) {
-        if (!hasInit) {
-            hasInit = true;
-        } else {
-            error('ackordion error - you can only call init once');
-            return;
-        }
-
-        if (config && config.id) {
-            root = document.getElementById(config.id);
-        } else {
-            root = $$('.ackordion')[0];
-        }
-        if (!root) {
-            error('ackordion error - component not found in html');
-        } else {
-            items = $$('li', root),
-                headers = $$('li > button', root),
-                contents = $$('section > div', root);
-
-            if (config && config.duration) {
-                contents.forEach(function(content) {
-                    content.style.transitionDuration = config.duration;
-                });
-            }
-        }
-
-        if (config && config.resetMaxHeightAfterTransitionEnd) {
-            contents.forEach(function(content) {
-                content.addEventListener('transitionend', function(event) {
-                    content.style.maxHeight = ''; // reset
-                }, false);
-            });
-        }
+        var accordion = new Accordion(config);
     }
 
     return {
