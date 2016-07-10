@@ -15,5 +15,5 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Vanilla JS
 * Multiple accordions supported
  
-# limitations
-* 
+# License
+MIT
