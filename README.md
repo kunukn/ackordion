@@ -18,17 +18,6 @@ http://codepen.io/kunukn/full/zBEEEq/
 * Vanilla JS
 * Multiple accordions supported
 
-# supported browsers
-* Chrome - latest 2 versions
-* Firefox - latest 2 versions
-* Safari on desktop and iPhone, iPad - latest 2 versions
-* IE11
-* Edge - latest 2 versions
-* Android Chrome - latest 2 versions
-
-
-# known bugs
-
 # html structure
 ```html
 <ul class="ackordion" id="ackordion-1">
@@ -50,6 +39,40 @@ http://codepen.io/kunukn/full/zBEEEq/
 * button is the header
 * section is the wrapper to hide the content on collapsed
 * div is the content area
+
+# usage
+
+Apply this JavaScript when the DOM is ready.
+
+```javascript
+ackordion.init({
+  id: 'ackordion-1',
+});
+```
+
+# configuration
+
+```javascript
+var config = {
+  id: 'ackordion-1', // html id - Required
+  duration: '600ms', // transition duration - Optional
+  transition: 'max-height 300ms ease-out', // custom css transition - Optional
+  autoClosePrevious: false, // behave like a collapsible component - Optional
+};
+ackordion.init(config);
+```
+
+# supported browsers
+* Chrome - latest 2 versions
+* Firefox - latest 2 versions
+* Safari on desktop and iPhone, iPad - latest 2 versions
+* IE11
+* Edge - latest 2 versions
+* Android Chrome - latest 2 versions
+
+
+# known bugs
+
 
 # license
 MIT
