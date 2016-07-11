@@ -1,5 +1,15 @@
-;
+/*!
+ * ackordion JavaScript Library v0.3
+ * https://github.com/kunukn/ackordion/
+ *
+ * Copyright Kunuk Nykjaer
+ * Released under the MIT license
+ */
+
 window.ackordion = (function(window, document, console) {
+
+
+    "use strict";
 
     function qs(expr, context) {
         return (context || document).querySelector(expr);
@@ -73,7 +83,7 @@ window.ackordion = (function(window, document, console) {
         self.contents = qsa('section > div', self.root);
 
         self.contents.forEach(function(content) {
-            // not used, css is used for this instead
+            // not used, css is used instead
             // content.style.maxHeight = '0px';
         });
 
@@ -96,6 +106,9 @@ window.ackordion = (function(window, document, console) {
     }
 
     function expand(element) {
+
+        if(!element)
+            return;
 
         function transitionEnd(event) {
 
@@ -127,12 +140,15 @@ window.ackordion = (function(window, document, console) {
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
-        element.offsetHeight; // reflow
+        element.offsetHeight; // force reflow to apply transition animation
 
         element.style.maxHeight = BCR.height + 'px';
     }
 
     function collapse(element) {
+
+        if(!element) 
+            return;
 
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
@@ -147,16 +163,20 @@ window.ackordion = (function(window, document, console) {
 
         element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect(),
-            height = BCR.height === 0 ? 1 : BCR.height;
+            height = BCR.height;
+
+        if (height === 0) {
+            // Already collapsed, then stop here
+            element.classList.remove('ackordion-fix-safari-bug');
+            return;
+        }
 
         element.style.maxHeight = height + 'px';
 
-        /*
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
-        */
 
-        element.offsetHeight; // reflow
+        element.offsetHeight; // force reflow
         element.classList.remove('ackordion-fix-safari-bug');
 
         setTimeout(function() {
@@ -165,6 +185,10 @@ window.ackordion = (function(window, document, console) {
     }
 
     function toggle(element, event) {
+
+        if(!element)
+            return;
+
         var li = element.parentNode,
             root = li.parentNode,
             accordionIndex = +root.dataset.ackordion,
@@ -199,7 +223,7 @@ window.ackordion = (function(window, document, console) {
     function clearPrevious(ackordionId) {
         var root = document.getElementById(ackordionId),
             index = +root.dataset.ackordion;
-        
+
         if (index) {
             var accordion = accordions[index];
             if (accordion) {
