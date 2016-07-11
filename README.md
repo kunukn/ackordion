@@ -50,7 +50,7 @@ ackordion.init({
 var config = {
   id: 'ackordion-1', // required - html id
   duration: '600ms', // optional - transition duration
-  transition: 'max-height 300ms ease-out', // optional - custom css transition
+  transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', // optional - custom css transition
   autoClosePrevious: false, // optional - behave like a collapsible component
 };
 ackordion.init(config);
