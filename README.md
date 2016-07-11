@@ -18,7 +18,9 @@ http://codepen.io/kunukn/full/zBEEEq/
         <button onclick="ackordion.toggle(this,event)">title</button>
         <section>
             <div>
-                Contrary to popular belief, Lorem Ipsum is not simply random text.
+                <article> 
+                    Contrary to popular belief, Lorem Ipsum is not simply random text.
+                </article>
             </div>
         </section>
     </li>
@@ -32,7 +34,8 @@ http://codepen.io/kunukn/full/zBEEEq/
 * li are the accordion items
 * button is the header
 * section is the wrapper to hide the content on collapsed
-* div is the content area
+* div is the content area without padding
+* article is used to for padding if needed, the element can be removed
 
 # usage
 
