@@ -1,4 +1,3 @@
-
 .ackordion--theme-red > li > button {
   background: #FF5722;
 }
@@ -17,5 +16,6 @@
 }
 .ackordion--theme-red > li > section > div ::first-letter {
   font-size: 200%;
+  font-weight: bold;
   color: #FF5722;
 }

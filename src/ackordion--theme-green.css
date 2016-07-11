@@ -1,8 +1,8 @@
-.ackordion > li > section > div{
+.ackordion--theme-green > li > section > div{
 	padding: 0 1rem;
 }
-.ackordion > li > section > div::before,
-.ackordion > li > section > div::after {
+.ackordion--theme-green > li > section > div::before,
+.ackordion--theme-green > li > section > div::after {
 	content: '';
 	display: block;
 	height: 1rem;
