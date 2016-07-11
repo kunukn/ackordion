@@ -11,11 +11,11 @@
 .ackordion--theme-red > li > section > div {
   background: linear-gradient(180deg, rgba(255, 87, 34, 0.1), white);
 }
-.ackordion--theme-red > li > section > div p {
+.ackordion--theme-red > li > section > div > * {
   margin: 0;
   padding: 0;
 }
-.ackordion--theme-red > li > section > div p::first-letter {
+.ackordion--theme-red > li > section > div ::first-letter {
   font-size: 200%;
   color: #FF5722;
 }

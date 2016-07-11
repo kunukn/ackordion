@@ -1,7 +1,7 @@
 .ackordion {
     width: 100%;
     max-width: 700px;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 2px solid black;
     list-style-type: none;
     margin: 0 auto;
@@ -29,9 +29,7 @@
 }
 
 .ackordion > li > section > div {
-    box-sizing: border-box;
-    padding: 0 1rem;
-    /* use pseudo for padding-top and bottom */
+    padding: 0; /* don't set padding here, use inner element instead */
     -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
     transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
     transform: translateZ(0);
@@ -39,20 +37,8 @@
     -webkit-backface-visibility: hidden;
 }
 
-.ackordion > li > section > div:before,
-.ackordion > li > section > div:after {
-    /* pseudo is used for padding-top and bottom  */
-    content: '';
-    display: block;
-    box-sizing: border-box;
-}
-
-.ackordion > li > section > div:before {
-    height: 1rem;
-}
-
-.ackordion > li > section > div:after {
-    height: 1rem;
+.ackordion > li > section > div > article {
+    padding: 1rem 1rem; /* use inner element of div to set padding */
 }
 
 .ackordion > li > button {
