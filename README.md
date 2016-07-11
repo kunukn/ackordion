@@ -10,13 +10,27 @@ Accordion library for fast mobile device rendering.
 # demo
 http://codepen.io/kunukn/full/zBEEEq/
 
-# features
-* CSS transition on dynamically calculated height value
-* Clean simple html structure with minimum CSS class usage 
-* Max-height is dynamically set and reset after the animation
-* Tabbing is supported
-* Vanilla JS
-* Multiple accordions supported
+# usage
+
+Apply this JavaScript when the DOM is ready.
+
+```javascript
+ackordion.init({
+  id: 'ackordion-1',
+});
+```
+
+# configuration
+
+```javascript
+var config = {
+  id: 'ackordion-1', // required - html id
+  duration: '600ms', // optional - transition duration
+  transition: 'max-height 300ms ease-out', // optional - custom css transition
+  autoClosePrevious: false, // optional - behave like a collapsible component
+};
+ackordion.init(config);
+```
 
 # html structure
 ```html
@@ -40,27 +54,15 @@ http://codepen.io/kunukn/full/zBEEEq/
 * section is the wrapper to hide the content on collapsed
 * div is the content area
 
-# usage
 
-Apply this JavaScript when the DOM is ready.
+# features
+* CSS transition on dynamically calculated height value
+* Clean simple html structure with minimum CSS class usage 
+* Max-height is dynamically set and reset after the animation
+* Tabbing is supported
+* Vanilla JS
+* Multiple accordions supported
 
-```javascript
-ackordion.init({
-  id: 'ackordion-1',
-});
-```
-
-# configuration
-
-```javascript
-var config = {
-  id: 'ackordion-1', // html id - Required
-  duration: '600ms', // transition duration - Optional
-  transition: 'max-height 300ms ease-out', // custom css transition - Optional
-  autoClosePrevious: false, // behave like a collapsible component - Optional
-};
-ackordion.init(config);
-```
 
 # supported browsers
 * Chrome - latest 2 versions
