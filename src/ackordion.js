@@ -8,8 +8,17 @@
 
 window.ackordion = (function(window, document, console) {
 
-
     "use strict";
+
+    // App variables
+    var log = console.log.bind(console),
+        error = console.error.bind(console),
+        cssClassActive = 'ackordion--active',
+        dataAckordion = 'data-ackordion',
+        accordionIndex = 1,
+        accordions = [],
+        transitionEndVendorPrefix = getTransitionEndVendorPrefixNameAsString();
+
 
     function qs(expr, context) {
         return (context || document).querySelector(expr);
@@ -19,15 +28,7 @@ window.ackordion = (function(window, document, console) {
         return [].slice.call((context || document).querySelectorAll(expr), 0);
     }
 
-    var log = console.log.bind(console),
-        error = console.error.bind(console),
-        cssClassActive = 'ackordion--active',
-        dataAckordion = 'data-ackordion',
-        accordionIndex = 1,
-        accordions = [],
-        transitionEndVendorPrefix = getTransitionEndVendorPrefixAsString();
-
-    function getTransitionEndVendorPrefixAsString() {
+    function getTransitionEndVendorPrefixNameAsString() {
         var t,
             el = document.createElement('div'),
             transitions = {
@@ -49,25 +50,28 @@ window.ackordion = (function(window, document, console) {
 
         var self = this;
 
+        // Accordion variables 
+
+        self.hasInit = false;
+        self.root; // component element root
+        self.id = config.id;
+        self.index = accordionIndex;
+        self.contents = [];
+        self.previous; // previous toggled element
+        self.transition = config.transition || '';
+        self.autoClosePrevious = true;
+
         if (!config) {
             error('ackordion error - you must provide a config');
             return;
         }
 
-        self.hasInit = false;
         if (!self.hasInit) {
             self.hasInit = true;
         } else {
             error('ackordion error - you can only call init once per id');
             return;
         }
-
-        self.id = accordionIndex;
-        self.root; // component element root
-        self.contents = [];
-        self.previous; // previous toggled element
-        self.autoClosePrevious = true;
-        self.transition = config.transition || '';
 
         if (config && config.id) {
             self.root = document.getElementById(config.id);
@@ -82,10 +86,12 @@ window.ackordion = (function(window, document, console) {
 
         self.contents = qsa('section > div', self.root);
 
+        // not used, css is used instead
+        /*
         self.contents.forEach(function(content) {
-            // not used, css is used instead
-            // content.style.maxHeight = '0px';
+            content.style.maxHeight = '0px';
         });
+        */
 
         if (self.transition) {
             self.contents.forEach(function(content) {
@@ -107,7 +113,7 @@ window.ackordion = (function(window, document, console) {
 
     function expand(element) {
 
-        if(!element)
+        if (!element)
             return;
 
         function transitionEnd(event) {
@@ -147,7 +153,7 @@ window.ackordion = (function(window, document, console) {
 
     function collapse(element) {
 
-        if(!element) 
+        if (!element)
             return;
 
         function transitionEnd(event) {
@@ -173,8 +179,10 @@ window.ackordion = (function(window, document, console) {
 
         element.style.maxHeight = height + 'px';
 
+        /*
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+        */
 
         element.offsetHeight; // force reflow
         element.classList.remove('ackordion-fix-safari-bug');
@@ -186,7 +194,7 @@ window.ackordion = (function(window, document, console) {
 
     function toggle(element, event) {
 
-        if(!element)
+        if (!element)
             return;
 
         var li = element.parentNode,
@@ -220,8 +228,8 @@ window.ackordion = (function(window, document, console) {
     }
 
 
-    function clearPrevious(ackordionId) {
-        var root = document.getElementById(ackordionId),
+    function clearPrevious(id) {
+        var root = document.getElementById(id),
             index = +root.dataset.ackordion;
 
         if (index) {
@@ -235,6 +243,23 @@ window.ackordion = (function(window, document, console) {
         return false;
     }
 
+    function destroy(id) {
+        if (!id)
+            return false;
+
+        accordions.forEach(function(accordion) {
+            if (accordion && accordion.id === id) {
+                accordion = undefined;
+                return true;
+            }
+        });
+        return false;
+    }
+
+    function destroyAll() {
+        accordions = [];
+    }
+
     function init(config) {
         new Accordion(config);
     }
@@ -244,6 +269,8 @@ window.ackordion = (function(window, document, console) {
         init: init,
         clearPrevious: clearPrevious,
         isTransitionEndDisabled: false,
+        destroy: destroy,
+        destroyAll: destroyAll,
     };
 
 })(window, window.document, window.console, undefined);
