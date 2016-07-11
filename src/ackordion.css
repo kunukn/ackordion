@@ -29,7 +29,10 @@
 }
 
 .ackordion > li > section > div {
+    box-sizing: border-box;
     padding: 0 1rem;
+    /* use pseudo for padding-top and bottom */
+    -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
     transition: max-height cubic-bezier(0, 0, .3, 1) 160ms;
     transform: translateZ(0);
     will-change: max-height;
@@ -38,16 +41,17 @@
 
 .ackordion > li > section > div:before,
 .ackordion > li > section > div:after {
+    /* pseudo is used for padding-top and bottom  */
     content: '';
+    display: block;
+    box-sizing: border-box;
 }
 
 .ackordion > li > section > div:before {
-    display: block;
     height: 1rem;
 }
 
 .ackordion > li > section > div:after {
-    display: block;
     height: 1rem;
 }
 
@@ -58,8 +62,9 @@
     background: #444;
     color: white;
     padding: 1rem;
-    text-transform: uppercase;
+    margin: 0;
     border: 0;
+    text-transform: uppercase;
     font-size: inherit;
     text-align: left;
     cursor: pointer;
