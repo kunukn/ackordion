@@ -30,13 +30,13 @@ http://codepen.io/kunukn/full/zBEEEq/
 # known bugs
 
 # html structure
-```
+```html
 <ul class="ackordion" id="ackordion-1">
     <li>
-        <button onclick="ackordion.toggle(this,event)">title 1</button>
+        <button onclick="ackordion.toggle(this,event)">title</button>
         <section>
             <div>
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                Contrary to popular belief, Lorem Ipsum is not simply random text.
             </div>
         </section>
     </li>
