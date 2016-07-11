@@ -10,6 +10,30 @@ Accordion library for fast mobile device rendering.
 # demo
 http://codepen.io/kunukn/full/zBEEEq/
 
+
+# html structure
+```html
+<ul class="ackordion" id="ackordion-1">
+    <li>
+        <button onclick="ackordion.toggle(this,event)">title</button>
+        <section>
+            <div>
+                Contrary to popular belief, Lorem Ipsum is not simply random text.
+            </div>
+        </section>
+    </li>
+    <li>
+       ...
+    /<li>
+</ul>
+
+```
+* ul is the root component where an id must be provided
+* li are the accordion items
+* button is the header
+* section is the wrapper to hide the content on collapsed
+* div is the content area
+
 # usage
 
 Apply this JavaScript when the DOM is ready.
@@ -30,29 +54,11 @@ var config = {
   autoClosePrevious: false, // optional - behave like a collapsible component
 };
 ackordion.init(config);
-```
 
-# html structure
-```html
-<ul class="ackordion" id="ackordion-1">
-    <li>
-        <button onclick="ackordion.toggle(this,event)">title</button>
-        <section>
-            <div>
-                Contrary to popular belief, Lorem Ipsum is not simply random text.
-            </div>
-        </section>
-    </li>
-    <li>
-       ...
-    /<li>
-</ul>
+// To prevent using transition-end event use this.
+// If used the height is not auto adjusted on device rotate or browser resizing
+ackordion.isTransitionEndDisabled = true; // optional
 ```
-* ul is the root component where an id must be provided
-* li are the accordion items
-* button is the header
-* section is the wrapper to hide the content on collapsed
-* div is the content area
 
 
 # features
