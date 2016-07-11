@@ -43,13 +43,13 @@ http://codepen.io/kunukn/full/zBEEEq/
     <li>
        ...
     /<li>
-    <li>
-       ...
-    /<li>
 </ul>
 ```
-The button is the header. The section is the wrapper to hide the content. The div is the content area.
-
+* ul is the root component where an id must be provided
+* li are the accordion items
+* button is the header
+* section is the wrapper to hide the content on collapsed
+* div is the content area
 
 # license
 MIT
