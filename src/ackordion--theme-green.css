@@ -1,13 +1,26 @@
+.ackordion > li > section > div{
+	padding: 0 1rem;
+}
+.ackordion > li > section > div::before,
+.ackordion > li > section > div::after {
+	content: '';
+	display: block;
+	height: 1rem;
+}
+
 .ackordion--theme-green > li > button {
-  background: #689F38;
+    background: #689F38;
 }
+
 .ackordion--theme-green > li > button:hover {
-  background: #5c8c31;
+    background: #5c8c31;
 }
+
 .ackordion--theme-green > li > button:focus {
-  background: #4f792b;
+    background: #4f792b;
 }
+
 .ackordion--theme-green > li > section > div {
-  background: #222;
-  color: white;
+    background: #222;
+    color: white;
 }

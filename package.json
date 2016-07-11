@@ -1,0 +1,29 @@
+{
+  "name": "ackordion",
+  "version": "1.0.0",
+  "description": "VanillaJS mobile friendly accordion library",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd src && browser-sync start --server --files '*.*' --no-ghost-mode",
+    "clean": "rimraf dist/*",
+    "minifyjs": "uglifyjs src/ackordion.js -c -o dist/ackordion.min.js",
+    "minifycss": "cleancss src/ackordion.css -o dist/ackordion.min.css",
+    "deploy": "npm run clean && npm run minifyjs && npm run minifycss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunukn/ackordion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunukn/ackordion/issues"
+  },
+  "homepage": "https://github.com/kunukn/ackordion#readme",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "clean-css": "^3.4.18",
+    "rimraf": "^2.5.3",
+    "uglifyjs": "^2.4.10"
+  }
+}
