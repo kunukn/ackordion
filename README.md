@@ -15,9 +15,9 @@ This uses CSS transition on max-height value. The max-height is dynamically set 
 
 # html structure
 ```html
-<ul class="ackordion" id="ackordion-1">
-    <li>
-        <button onclick="ackordion.toggle(this,event)">title</button>
+<ul role="tablist" class="ackordion" id="ackordion-1">
+    <li role="tabpanel">
+        <button role="tab" onclick="ackordion.toggle(this,event)">title</button>
         <section>
             <div>
                 <article> 
