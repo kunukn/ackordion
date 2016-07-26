@@ -5,11 +5,13 @@ VanillaJS mobile friendly accordion library
 alpha 0.03 - fix for safari double animation
 
 # about
-Accordion library for fast mobile device rendering. 
+Accordion library for faster mobile device rendering using CSS transition instead of JS animation such as jQuery slideToggle.
 
 # demo
 http://codepen.io/kunukn/full/zBEEEq/
 
+# how does it work?
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content.   
 
 # html structure
 ```html
@@ -82,8 +84,9 @@ ackordion.isTransitionEndDisabled = true; // optional
 * Android Chrome - latest 2 versions
 
 
-# known bugs
-
+# known bugs / possible hiccups
+* Safari animates a change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
+* The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate animations.
 
 # license
 MIT
