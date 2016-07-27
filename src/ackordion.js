@@ -284,12 +284,12 @@ window.ackordion = (function(window) {
 
     function initAll(config) {
         if (config && typeof config === 'object') {
-            gsa('.ackordion').forEach(function(accordion) {
+            qsa('.ackordion').forEach(function(accordion) {
                 config.id = accordion.getAttribute('id');
                 new Accordion(config);
             });
         } else {
-            gsa('.ackordion').forEach(function(accordion) {
+            qsa('.ackordion').forEach(function(accordion) {
                 new Accordion(accordion.getAttribute('id'));
             });
         }
