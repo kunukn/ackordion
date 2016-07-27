@@ -260,7 +260,7 @@ window.ackordion = (function(window) {
 
         var accordion = accordions[id];
         if (accordion) {
-            accordion = undefined;
+            accordions[id] = undefined;
             return true;
         }
 
