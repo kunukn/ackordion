@@ -55,18 +55,19 @@ Default with toggle aside
 
 ```
 
-* ul is the root component where an id must be provided
-* li are the accordion items
-* button is the toggle
-* section is the wrapper to hide the content on collapsed
-* div is the content area without padding top and bottom
-* article is used to for padding if needed, the element can be removed
+* **ul** is the root component where an id must be provided
+* **li** are the accordion items
+* **button** is the toggle
+* **section** is the wrapper to hide the content on collapsed
+* **div** is the content area without padding top and bottom
+* **article** is used to for padding if needed, the element can be removed
 
 # usage
 
 * Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
 * Apply the markup structure for the accordion
 * Init the accordion with JS
+* Apply custom css to override the library css
 
 Apply this JavaScript when the DOM is ready for a single accordion. 
 The id must match the one in the html markup.
