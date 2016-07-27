@@ -11,13 +11,13 @@ Accordion library for faster mobile device rendering using CSS transition instea
 http://codepen.io/kunukn/full/zBEEEq/
 
 # how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onClick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings.
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings.
 
 # html structure
 ```html
 <ul role="tablist" class="ackordion" id="ackordion-1">
     <li role="tabpanel">
-        <button role="tab" onClick="ackordion.toggle(this,event)">title</button>
+        <button role="tab" onclick="ackordion.toggle(this,event)">title</button>
         <section>
             <div>
                 <article> 
