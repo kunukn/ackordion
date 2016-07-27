@@ -8,7 +8,7 @@ Accordion library for faster mobile device rendering using CSS transition instea
 http://codepen.io/kunukn/full/zBEEEq/
 
 # how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings.
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
 
 # html structure
 
@@ -123,17 +123,18 @@ You can remove all the used memory by applying destroyAll
 # features
 * Small library - JS is 5kb minified and CSS is 1kb minified
 * CSS max-height transition on dynamically calculated height value
-* Clean simple html structure with minimum CSS class usage 
+* Simple html structure with minimum CSS class usage 
 * Max-height is dynamically set and reset to auto after the animation
 * Tabbing is supported
+* Accessibility friendly, a11y
 * Vanilla JS
 * Multiple accordions supported
 
 
 # supported browsers
 
-requestAnimationFrame, transitionend event, css max-height transition and Ecmascript 5 are required.
-Browsers which supports those should be fine.
+requestAnimationFrame (rAF), transitionend event, css max-height transition and Ecmascript 5 are required.
+Browsers which supports those should be fine. If needed the code can be refactored to excluded usage of rAF and transitionend. 
 
 * Chrome - latest 5 versions
 * Firefox - latest 5 versions
@@ -144,7 +145,7 @@ Browsers which supports those should be fine.
 
 
 # known bugs / possible hiccups
-* Safari animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
+* Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
 # version
