@@ -160,11 +160,9 @@ window.ackordion = (function(window) {
 
                     element.classList.add('ackordion-fix-safari-bug');
 
+                    element.style.maxHeight = 'none';
                     setTimeout(function() {
-                        element.style.maxHeight = 'none';
-                        setTimeout(function() {
-                            element.classList.remove('ackordion-fix-safari-bug');
-                        }, 0);
+                        element.classList.remove('ackordion-fix-safari-bug');
                     }, 0);
                 }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
@@ -210,7 +208,7 @@ window.ackordion = (function(window) {
         var BCR = element.getBoundingClientRect(),
             height = BCR.height;
 
-        if (height === 0 || (height+'px') === accordion.closeHeight) {
+        if (height === 0 || (height + 'px') === accordion.closeHeight) {
             // Already collapsed, then stop here
             element.classList.remove('ackordion-fix-safari-bug');
             return;
