@@ -1,10 +1,10 @@
-.ackordion--theme-red > li > button {
+.ackordion--theme-red button[role=tab] {
   background: #FF5722;
 }
-.ackordion--theme-red > li > button:hover {
+.ackordion--theme-red button[role=tab]:hover {
   background: #ff4409;
 }
-.ackordion--theme-red > li > button:focus {
+.ackordion--theme-red button[role=tab]:focus {
   background: #ee3900;
 }
 .ackordion--theme-red > li > section > div {

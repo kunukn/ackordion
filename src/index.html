@@ -26,9 +26,9 @@
 
 <body>
     <h1>Default</h1>
-    <ul class="ackordion" id="ackordion-1">
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 1</button>
+    <ul role="tablist" class="ackordion" id="ackordion-1">
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 1</button>
             <section>
                 <div>
                     <article>
@@ -37,8 +37,8 @@
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 2</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 2</button>
             <section>
                 <div>
                     <article>
@@ -47,8 +47,50 @@
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 3</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 3</button>
+            <section>
+                <div>
+                    <article>
+                        Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    </article>
+                </div>
+            </section>
+        </li>
+    </ul>
+    <h1>Default with toggle aside</h1>
+    <ul role="tablist" class="ackordion" id="ackordion-2">
+        <li role="tabpanel">
+            <header>
+                <label>This is header 1</label>
+                <button role="tab" onclick="ackordion.toggle(this,event)">click</button>
+            </header>
+            <section>
+                <div>
+                    <article>
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                    </article>
+                </div>
+            </section>
+        </li>
+        <li role="tabpanel">
+            <header>
+                <label>This is header 2</label>
+                <button role="tab" onclick="ackordion.toggle(this,event)">click</button>
+            </header>
+            <section>
+                <div>
+                    <article>
+                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+                    </article>
+                </div>
+            </section>
+        </li>
+        <li role="tabpanel">
+            <header>
+                <label>This is header 3</label>
+                <button role="tab" onclick="ackordion.toggle(this,event)">click</button>
+            </header>
             <section>
                 <div>
                     <article>
@@ -59,25 +101,25 @@
         </li>
     </ul>
     <h1>Custom theme</h1>
-    <ul class="ackordion ackordion--theme-green" id="ackordion-2">
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 1</button>
+    <ul role="tablist" class="ackordion ackordion--theme-green" id="ackordion-3">
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 1</button>
             <section>
                 <div>
                     Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 2</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 2</button>
             <section>
                 <div>
                     Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 3</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 3</button>
             <section>
                 <div>
                     Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
@@ -86,9 +128,9 @@
         </li>
     </ul>
     <h1>Another custom theme</h1>
-    <ul class="ackordion ackordion--theme-red" id="ackordion-3">
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 1</button>
+    <ul role="tablist" class="ackordion ackordion--theme-red" id="ackordion-4">
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 1</button>
             <section>
                 <div>
                     <article>
@@ -97,8 +139,8 @@
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 2</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 2</button>
             <section>
                 <div>
                     <article>
@@ -107,8 +149,8 @@
                 </div>
             </section>
         </li>
-        <li>
-            <button onclick="ackordion.toggle(this,event)">title 3</button>
+        <li role="tabpanel">
+            <button role="tab" onclick="ackordion.toggle(this,event)">title 3</button>
             <section>
                 <div>
                     <article>
@@ -120,15 +162,15 @@
     </ul>
     <script src="ackordion.js"></script>
     <script>
+    ackordion.init('ackordion-1');
+    ackordion.init('ackordion-2');
+
     ackordion.init({
-        id: 'ackordion-1',
-    });
-    ackordion.init({
-        id: 'ackordion-2',
+        id: 'ackordion-3',
         duration: '600ms',
     });
     ackordion.init({
-        id: 'ackordion-3',
+        id: 'ackordion-4',
         autoClosePrevious: false,
         transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)',
     });

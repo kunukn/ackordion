@@ -8,15 +8,15 @@
 	height: 1rem;
 }
 
-.ackordion--theme-green > li > button {
+.ackordion--theme-green button[role=tab] {
     background: #689F38;
 }
 
-.ackordion--theme-green > li > button:hover {
+.ackordion--theme-green button[role=tab]:hover {
     background: #5c8c31;
 }
 
-.ackordion--theme-green > li > button:focus {
+.ackordion--theme-green button[role=tab]:focus {
     background: #4f792b;
 }
 

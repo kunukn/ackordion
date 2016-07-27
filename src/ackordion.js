@@ -6,13 +6,16 @@
  * Released under the MIT license
  */
 
-window.ackordion = (function(window, document, console) {
+window.ackordion = (function(window) {
 
     "use strict";
 
     // App variables
-    var log = console.log.bind(console),
+    var document = window.document,
+        console = window.console,
+        log = console.log.bind(console),
         error = console.error.bind(console),
+        cssClassComponent = 'ackordion',
         cssClassActive = 'ackordion--active',
         dataAckordion = 'data-ackordion',
         accordionIndex = 1,
@@ -26,6 +29,26 @@ window.ackordion = (function(window, document, console) {
 
     function qsa(expr, context) {
         return [].slice.call((context || document).querySelectorAll(expr), 0);
+    }
+
+    function getAckordionTabPanel(element) {
+        var root = element;
+        while (root) {
+            root = root.parentElement;
+            if (root && root.getAttribute('role') === 'tabpanel')
+                return root;
+        }
+        return undefined;
+    }
+
+    function getAckordionComponent(element) {
+        var root = element;
+        while (root) {
+            root = root.parentElement;
+            if (root && root.classList.contains(cssClassComponent))
+                return root;
+        }
+        return undefined;
     }
 
     function getTransitionEndVendorPrefixNameAsString() {
@@ -48,50 +71,49 @@ window.ackordion = (function(window, document, console) {
 
     var Accordion = function(config) {
 
-        var self = this;
-
-        // Accordion variables 
-
-        self.hasInit = false;
-        self.root; // component element root
-        self.id = config.id;
-        self.index = accordionIndex;
-        self.contents = [];
-        self.previous; // previous toggled element
-        self.transition = config.transition || '';
-        self.autoClosePrevious = true;
-
         if (!config) {
             error('ackordion error - you must provide a config');
             return;
         }
 
-        if (!self.hasInit) {
-            self.hasInit = true;
-        } else {
-            error('ackordion error - you can only call init once per id');
-            return;
-        }
+        var self = this;
 
-        if (config && config.id) {
+        // Accordion variables 
+
+        self.root; // component element root
+        self.index = accordionIndex;
+        self.contents = [];
+        self.previous; // previous toggled element
+        self.transition;
+        self.autoClosePrevious = true;
+
+        // Get root and contents
+
+        if (typeof config === 'string') {
+            self.id = config;
+            self.root = document.getElementById(config);
+        } else if (typeof config === 'object') {
+            self.id = config.id;
             self.root = document.getElementById(config.id);
         }
         if (!self.root) {
-            error('ackordion error - component not found in html');
+            error('ackordion error - component not found in html with id: ' + self.id);
             return;
         }
 
-        if (config.autoClosePrevious === false)
-            self.autoClosePrevious = false;
-
         self.contents = qsa('section > div', self.root);
 
-        // not used, css is used instead
-        /*
-        self.contents.forEach(function(content) {
-            content.style.maxHeight = '0px';
-        });
-        */
+        // Set rest of config
+
+        if (typeof config === 'object') {
+
+            self.transition = config.transition || '';
+            self.duration = config.duration || '';
+
+            if (config.autoClosePrevious === false)
+                self.autoClosePrevious = false;
+        }
+
 
         if (self.transition) {
             self.contents.forEach(function(content) {
@@ -99,7 +121,7 @@ window.ackordion = (function(window, document, console) {
             });
         }
 
-        if (config && config.duration) {
+        if (self.duration) {
             self.contents.forEach(function(content) {
                 content.style.transitionDuration = config.duration;
             });
@@ -132,7 +154,7 @@ window.ackordion = (function(window, document, console) {
                         element.style.maxHeight = 'none';
                         setTimeout(function() {
                             element.classList.remove('ackordion-fix-safari-bug');
-                        }, 10);
+                        }, 0);
                     }, 0);
                 }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
@@ -197,34 +219,37 @@ window.ackordion = (function(window, document, console) {
         if (!element)
             return;
 
-        var li = element.parentNode,
-            root = li.parentNode,
+        var tabpanel = getAckordionTabPanel(element),
+            root = tabpanel.parentNode,
             accordionIndex = +root.dataset.ackordion,
             accordion = accordions[accordionIndex];
 
-        li.classList.toggle(cssClassActive);
+        tabpanel.classList.toggle(cssClassActive);
 
-        var section = element.nextElementSibling,
+        var section = qs('section', tabpanel),
             content = section.firstElementChild,
             BCR;
 
-        if (accordion && accordion.autoClosePrevious && accordion.previous && li !== accordion.previous) {
+        if (accordion && accordion.autoClosePrevious && accordion.previous && tabpanel !== accordion.previous) {
             if (accordion.previous.classList.contains(cssClassActive)) {
                 var previousContent = qs('section > div', accordion.previous);
                 collapse(previousContent);
                 accordion.previous.classList.remove(cssClassActive);
+                accordion.previous.removeAttribute('aria-expanded');
             }
         }
 
-        if (li.classList.contains(cssClassActive)) {
+        if (tabpanel.classList.contains(cssClassActive)) {
+            tabpanel.setAttribute('aria-expanded', 'true');
             expand(content);
         } else {
+            tabpanel.removeAttribute('aria-expanded');
             collapse(content);
         }
 
         // update previous
         if (accordion)
-            accordions[accordionIndex].previous = li;
+            accordions[accordionIndex].previous = tabpanel;
     }
 
 
@@ -257,6 +282,11 @@ window.ackordion = (function(window, document, console) {
     }
 
     function destroyAll() {
+        accordions.forEach(function(accordion) {
+            if (accordion) {
+                accordion = undefined;
+            }
+        });
         accordions = [];
     }
 
@@ -273,4 +303,4 @@ window.ackordion = (function(window, document, console) {
         destroyAll: destroyAll,
     };
 
-})(window, window.document, window.console, undefined);
+})(window, undefined);
