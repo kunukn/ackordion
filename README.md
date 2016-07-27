@@ -64,6 +64,8 @@ Default with toggle aside
 
 # usage
 
+Check the index.html for inspiration.
+
 * Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
 * Apply the markup structure for the accordion
 * Init the accordion with JS
@@ -111,13 +113,14 @@ Alternatively you can apply same config to all accordions using initAll.
 var config = {
   duration: '300ms',
   transition: 'max-height 200ms cubic-bezier(.27,.82,.29,.84)',
-  autoClosePrevious: true,
+  autoClosePrevious: false,
 };
 ackordion.initAll(config);
 ```
 
-If you later want to remove an accordion you can remove the used memory, e.g.
-`ackordion.destroy('the-accordion-id');`
+If you later want to remove an accordion from your page you can remove the used memory.
+
+E.g. `ackordion.destroy('the-accordion-id');`
 
 You can remove all the used memory by applying destroyAll
 `ackordion.destroyAll();`
@@ -137,7 +140,7 @@ You can remove all the used memory by applying destroyAll
 # supported browsers
 
 requestAnimationFrame (rAF), transitionend event, css max-height transition and Ecmascript 5 are required.
-Browsers which supports those should be fine. If needed the code can be refactored to excluded usage of rAF and transitionend. 
+Browsers which supports those should be fine. If needed the code can be refactored to exclude usage of rAF and transitionend. 
 
 * Chrome - latest 5 versions
 * Firefox - latest 5 versions
