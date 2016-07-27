@@ -1,5 +1,5 @@
 /*!
- * ackordion JavaScript Library v0.3
+ * ackordion JavaScript Library v0.4
  * https://github.com/kunukn/ackordion/
  *
  * Copyright Kunuk Nykjaer
@@ -15,11 +15,8 @@ window.ackordion = (function(window) {
         console = window.console,
         log = console.log.bind(console),
         error = console.error.bind(console),
-        cssClassComponent = 'ackordion',
         cssClassActive = 'ackordion--active',
-        dataAckordion = 'data-ackordion',
-        accordionIndex = 1,
-        accordions = [],
+        accordions = {},
         transitionEndVendorPrefix = getTransitionEndVendorPrefixNameAsString();
 
 
@@ -36,16 +33,6 @@ window.ackordion = (function(window) {
         while (root) {
             root = root.parentElement;
             if (root && root.getAttribute('role') === 'tabpanel')
-                return root;
-        }
-        return undefined;
-    }
-
-    function getAckordionComponent(element) {
-        var root = element;
-        while (root) {
-            root = root.parentElement;
-            if (root && root.classList.contains(cssClassComponent))
                 return root;
         }
         return undefined;
@@ -81,7 +68,6 @@ window.ackordion = (function(window) {
         // Accordion variables 
 
         self.root; // component element root
-        self.index = accordionIndex;
         self.contents = [];
         self.previous; // previous toggled element
         self.transition;
@@ -127,10 +113,13 @@ window.ackordion = (function(window) {
             });
         }
 
-        self.root.dataset.ackordion = accordionIndex + '';
-
-        accordions[accordionIndex] = self;
-        accordionIndex++;
+        var id = self.root.getAttribute('id');
+        if (id) {
+            if (accordions[id]) {
+                log('ackordion warning - this id has already been init ' + id);
+            }
+            accordions[id] = self;
+        }
     }
 
     function expand(element) {
@@ -143,8 +132,6 @@ window.ackordion = (function(window) {
             if (event.propertyName == 'max-height') {
 
                 if (element.style.maxHeight !== '0px') {
-
-                    var height = getComputedStyle(event.srcElement).height;
 
                     // Using this technique because Safari has double animation bug when max-height is later set again
                     // http://stackoverflow.com/q/27806229/815507
@@ -221,14 +208,13 @@ window.ackordion = (function(window) {
 
         var tabpanel = getAckordionTabPanel(element),
             root = tabpanel.parentNode,
-            accordionIndex = +root.dataset.ackordion,
-            accordion = accordions[accordionIndex];
+            id = root.getAttribute('id'),
+            accordion = accordions[id];
 
         tabpanel.classList.toggle(cssClassActive);
 
         var section = qs('section', tabpanel),
-            content = section.firstElementChild,
-            BCR;
+            content = section.firstElementChild;
 
         if (accordion && accordion.autoClosePrevious && accordion.previous && tabpanel !== accordion.previous) {
             if (accordion.previous.classList.contains(cssClassActive)) {
@@ -249,22 +235,19 @@ window.ackordion = (function(window) {
 
         // update previous
         if (accordion)
-            accordions[accordionIndex].previous = tabpanel;
+            accordions[id].previous = tabpanel;
     }
 
 
     function clearPrevious(id) {
-        var root = document.getElementById(id),
-            index = +root.dataset.ackordion;
-
-        if (index) {
-            var accordion = accordions[index];
+        if (id) {
+            var accordion = accordions[id];
             if (accordion) {
-                accordions[index].previous = undefined;
+                accordions[id].previous = undefined;
                 return true;
             }
-        }
 
+        }
         return false;
     }
 
@@ -272,22 +255,20 @@ window.ackordion = (function(window) {
         if (!id)
             return false;
 
-        accordions.forEach(function(accordion) {
-            if (accordion && accordion.id === id) {
-                accordion = undefined;
-                return true;
-            }
-        });
+        var accordion = accordions[id];
+        if (accordion) {
+            accordion = undefined;
+            return true;
+        }
+
         return false;
     }
 
     function destroyAll() {
-        accordions.forEach(function(accordion) {
-            if (accordion) {
-                accordion = undefined;
-            }
+        Object.keys(accordions).forEach(function(id) {
+            accordions[id] = undefined;
         });
-        accordions = [];
+        accordions = {};
     }
 
     function init(config) {
