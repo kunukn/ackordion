@@ -59,7 +59,7 @@ window.ackordion = (function(window) {
     var Accordion = function(config) {
 
         if (!config) {
-            error('ackordion error - you must provide a config');
+            error('ackordion error - you must provide a config or id');
             return;
         }
 
@@ -272,12 +272,30 @@ window.ackordion = (function(window) {
     }
 
     function init(config) {
-        new Accordion(config);
+        if (config) {
+            new Accordion(config);
+        } else {
+            error('ackordion error - you must provide an argument to init');
+        }
+    }
+
+    function initAll(config) {
+        if (config && typeof config === 'object') {
+            gsa('.ackordion').forEach(function(accordion) {
+                config.id = accordion.getAttribute('id');
+                new Accordion(config);
+            });
+        } else {
+            gsa('.ackordion').forEach(function(accordion) {
+                new Accordion(accordion.getAttribute('id'));
+            });
+        }
     }
 
     return {
         toggle: toggle,
         init: init,
+        initAll: initAll,
         clearPrevious: clearPrevious,
         isTransitionEndDisabled: false,
         destroy: destroy,
