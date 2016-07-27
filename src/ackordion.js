@@ -176,26 +176,21 @@ window.ackordion = (function(window) {
         // http://stackoverflow.com/q/27806229/815507
         element.classList.add('ackordion-fix-safari-bug');
 
-        setTimeout(function() {
-            element.style.maxHeight = 'none';
+        element.style.maxHeight = 'none';
 
-            var BCR = element.getBoundingClientRect();
+        var BCR = element.getBoundingClientRect();
 
-            element.style.maxHeight = accordion.closeHeight;
+        element.style.maxHeight = accordion.closeHeight;
 
-            setTimeout(function() {
-                element.classList.remove('ackordion-fix-safari-bug');
+        if (!ackordion.isTransitionEndDisabled)
+            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
-                if (!ackordion.isTransitionEndDisabled)
-                    element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+        element.offsetHeight; // force reflow to apply transition animation
+        element.classList.remove('ackordion-fix-safari-bug');
 
-                element.offsetHeight; // force reflow to apply transition animation
-
-                window.requestAnimationFrame(function() {
-                    element.style.maxHeight = BCR.height + 'px';
-                });
-            }, 0);
-        }, 0);
+        window.requestAnimationFrame(function() {
+            element.style.maxHeight = BCR.height + 'px';
+        });
     }
 
     function collapse(element, accordion) {
@@ -215,7 +210,7 @@ window.ackordion = (function(window) {
         var BCR = element.getBoundingClientRect(),
             height = BCR.height;
 
-        if (height === 0) {
+        if (height === 0 || (height+'px') === accordion.closeHeight) {
             // Already collapsed, then stop here
             element.classList.remove('ackordion-fix-safari-bug');
             return;
