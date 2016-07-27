@@ -113,6 +113,13 @@ var config = {
 ackordion.initAll(config);
 ```
 
+If you later want to remove an accordion you can remove the used memory, e.g.
+`ackordion.destroy('the-accordion-id');`
+
+You can remove all the used memory by applying destroyAll
+`ackordion.destroyAll();`
+
+
 # features
 * Small library - JS is 5kb minified and CSS is 1kb minified
 * CSS max-height transition on dynamically calculated height value
@@ -125,13 +132,13 @@ ackordion.initAll(config);
 
 # supported browsers
 
-requestAnimationFrame, transitionend event, css max-height transition and ecmascript 5 are required.
+requestAnimationFrame, transitionend event, css max-height transition and Ecmascript 5 are required.
 Browsers which supports those should be fine.
 
 * Chrome - latest 5 versions
 * Firefox - latest 5 versions
 * Safari on desktop and iPhone, iPad - latest 5 versions
-* IE11
+* IE10 (not tested), IE11
 * Edge - latest 5 versions
 * Android Chrome - latest 5 versions
 
