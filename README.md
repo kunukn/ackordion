@@ -16,7 +16,7 @@ Default
 ```html
 <ul role="tablist" class="ackordion" id="ackordion-1">
     <li role="tabpanel">
-        <button role="tab" onclick="ackordion.toggle(this,event)">title</button>
+        <button role="tab" onclick="ackordion.toggle(this)">title</button>
         <section>
             <div>
                 <article> 
@@ -38,7 +38,7 @@ Default with toggle aside
     <li role="tabpanel">
         <header>
             <label>This is a header</label>
-            <button role="tab" onclick="ackordion.toggle(this,event)">toggle</button>
+            <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
         </header>
         <section>
             <div>
