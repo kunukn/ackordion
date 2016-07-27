@@ -96,6 +96,30 @@ window.ackordion = (function(window) {
 
             self.transition = config.transition || '';
             self.duration = config.duration || '';
+            self.closeHeight = config.closeHeight || '0px';
+
+            /*
+                If close height is value larger than 0, e.g. 36px
+                Then override css library by adding custom style element
+            */
+            if (self.closeHeight.lastIndexOf('0', 0) !== 0) {
+
+                var css = ['.ackordion[id="',
+                        self.id,
+                        '"] > li:not(.ackordion--active) > section > div { max-height: ',
+                        self.closeHeight,
+                        ';}'
+                    ].join(''),
+                    head = document.head || document.getElementsByTagName('head')[0],
+                    style = document.createElement('style');
+
+                if (style.styleSheet) {
+                    style.styleSheet.cssText = css;
+                } else {
+                    style.appendChild(document.createTextNode(css));
+                }
+                head.appendChild(style);
+            }
 
             if (config.autoClosePrevious === false)
                 self.autoClosePrevious = false;
@@ -134,8 +158,6 @@ window.ackordion = (function(window) {
 
                 if (element.style.maxHeight !== accordion.closeHeight) {
 
-                    // Using this technique because Safari has double animation bug when max-height is later set again
-                    // http://stackoverflow.com/q/27806229/815507
                     element.classList.add('ackordion-fix-safari-bug');
 
                     setTimeout(function() {
@@ -145,22 +167,35 @@ window.ackordion = (function(window) {
                         }, 0);
                     }, 0);
                 }
-                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
+                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
             }
         }
 
-        element.style.maxHeight = 'none';
-        var BCR = element.getBoundingClientRect();
-        element.style.maxHeight = accordion.closeHeight;
 
-        if (!ackordion.isTransitionEndDisabled)
-            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+        // Using this technique because Safari has double animation bug when max-height is later set again
+        // http://stackoverflow.com/q/27806229/815507
+        element.classList.add('ackordion-fix-safari-bug');
 
-        element.offsetHeight; // force reflow to apply transition animation
+        setTimeout(function() {
+            element.style.maxHeight = 'none';
 
-        window.requestAnimationFrame(function() {
-            element.style.maxHeight = BCR.height + 'px';
-        });
+            var BCR = element.getBoundingClientRect();
+
+            element.style.maxHeight = accordion.closeHeight;
+
+            setTimeout(function() {
+                element.classList.remove('ackordion-fix-safari-bug');
+
+                if (!ackordion.isTransitionEndDisabled)
+                    element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+
+                element.offsetHeight; // force reflow to apply transition animation
+
+                window.requestAnimationFrame(function() {
+                    element.style.maxHeight = BCR.height + 'px';
+                });
+            }, 0);
+        }, 0);
     }
 
     function collapse(element, accordion) {
@@ -201,7 +236,7 @@ window.ackordion = (function(window) {
         });
     }
 
-    function toggle(element, event) {
+    function toggle(element) {
 
         if (!element)
             return;
@@ -216,15 +251,6 @@ window.ackordion = (function(window) {
             content = section.firstElementChild;
 
         // --- Begin animation 
-        if (accordion && accordion.autoClosePrevious && accordion.previous && tabpanel !== accordion.previous) {
-            if (accordion.previous.classList.contains(cssClassActive)) {
-                var previousContent = qs('section > div', accordion.previous);
-                collapse(previousContent, accordion);
-                accordion.previous.classList.remove(cssClassActive);
-                accordion.previous.removeAttribute('aria-expanded');
-            }
-        }
-
         tabpanel.classList.toggle(cssClassActive);
 
         if (tabpanel.classList.contains(cssClassActive)) {
@@ -233,6 +259,14 @@ window.ackordion = (function(window) {
         } else {
             tabpanel.removeAttribute('aria-expanded');
             collapse(content, accordion);
+        }
+        if (accordion && accordion.autoClosePrevious && accordion.previous && tabpanel !== accordion.previous) {
+            if (accordion.previous.classList.contains(cssClassActive)) {
+                var previousContent = qs('section > div', accordion.previous);
+                collapse(previousContent, accordion);
+                accordion.previous.classList.remove(cssClassActive);
+                accordion.previous.removeAttribute('aria-expanded');
+            }
         }
         // --- End animation
 

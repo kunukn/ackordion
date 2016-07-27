@@ -29,7 +29,8 @@
 }
 
 .ackordion > li > section > div {
-    padding: 0; /* don't set padding-top or padding-bottom here, use inner element instead */
+    padding: 0;
+    /* don't set padding-top or padding-bottom here, use inner element instead */
     -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
     transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
     transform: translateZ(0);
@@ -56,19 +57,22 @@
     cursor: pointer;
     outline: none;
 }
+
 .ackordion > li > header {
     overflow: hidden;
 }
-.ackordion > li > header > label{
+
+.ackordion > li > header > label {
     padding: 1rem;
     display: inline-block;
     float: left;
     text-transform: uppercase;
 }
-.ackordion > li > header button[role=tab]{
+
+.ackordion > li > header button[role=tab] {
     float: right;
     display: inline-block;
-    width: auto;   
+    width: auto;
     outline: none;
 }
 
