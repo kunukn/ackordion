@@ -64,7 +64,12 @@ Default with toggle aside
 
 # usage
 
-Apply this JavaScript when the DOM is ready. The id must be provided for init.
+* Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
+* Apply the markup structure for the accordion
+* Init the accordion with JS
+
+Apply this JavaScript when the DOM is ready for a single accordion. 
+The id must match the one in the html markup.
 
 ```javascript
 ackordion.init('ackordion-1');
