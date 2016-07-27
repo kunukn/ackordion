@@ -85,16 +85,20 @@ ackordion.initAll();
 
 ```javascript
 var config = {
-  id: 'ackordion-1', // required - html id
-  duration: '600ms', // optional - transition duration
-  transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', // optional - custom css transition
-  autoClosePrevious: false, // optional - behave like a collapsible component
+  // required - html id
+  id: 'ackordion-1', 
+  // optional - transition duration, default is in the css, 200ms
+  duration: '600ms', 
+  // optional - default is in the css, max-height 200ms cubic-bezier(0,0,.3,1)
+  transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', 
+  // optional - behave like a collapsible component, default true
+  autoClosePrevious: false, 
 };
 ackordion.init(config);
 
 // To prevent using transition-end event use this.
 // If used the height is not auto adjusted on device rotate or browser resizing
-ackordion.isTransitionEndDisabled = true; // optional
+ackordion.isTransitionEndDisabled = true; // optional, default false
 ```
 
 
@@ -102,9 +106,9 @@ Alternatively you can apply same config to all accordions using initAll.
 
 ```javascript
 var config = {
-  duration: '300ms', // optional - transition duration
-  transition: 'max-height 200ms cubic-bezier(.27,.82,.29,.84)', // optional - custom css transition
-  autoClosePrevious: true, // optional
+  duration: '300ms',
+  transition: 'max-height 200ms cubic-bezier(.27,.82,.29,.84)',
+  autoClosePrevious: true,
 };
 ackordion.initAll(config);
 ```
