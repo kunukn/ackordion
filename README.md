@@ -94,6 +94,8 @@ var config = {
   transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', 
   // optional - behave like a collapsible component, default true
   autoClosePrevious: false, 
+  // optional - set a specific close height, default 0px
+  closeHeight: '32px',
 };
 ackordion.init(config);
 
@@ -150,6 +152,7 @@ Browsers which supports those should be fine. If needed the code can be refactor
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
 # version
+* beta  0.1 - support for custom close height value 
 * alpha 0.04 - support toggle aside
 * alpha 0.03 - fix for safari double animation
 
