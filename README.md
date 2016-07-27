@@ -2,8 +2,8 @@
 VanillaJS mobile friendly accordion library
 
 # version
-alpha 0.04 - support toggle aside
-alpha 0.03 - fix for safari double animation
+* alpha 0.04 - support toggle aside
+* alpha 0.03 - fix for safari double animation
 
 # about
 Accordion library for faster mobile device rendering using CSS transition instead of JS animation such as jQuery slideToggle.
