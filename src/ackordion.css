@@ -19,23 +19,24 @@
 }
 
 .ackordion > li:not(.ackordion--active) > section > div {
-    max-height: 0px;
+    height: 0px;
 }
 
 .ackordion > li > section {
     font-size: inherit;
     overflow: hidden;
     display: block;
+    box-sizing: border-box;
 }
 
 .ackordion > li > section > div {
+    box-sizing: border-box;
+    overflow: hidden;
     padding: 0;
     /* don't set padding-top or padding-bottom here, use inner element instead */
-    -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
-    transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
+    transition: height cubic-bezier(0, 0, .3, 1) 200ms;
     transform: translateZ(0);
-    will-change: max-height;
-    -webkit-backface-visibility: hidden;
+    will-change: height;
 }
 
 .ackordion > li > section > div > article {
@@ -59,7 +60,7 @@
 }
 
 .ackordion > li > header {
-    overflow: hidden;
+    overflow: hidden; /* clear fix */
 }
 
 .ackordion > li > header > label {
