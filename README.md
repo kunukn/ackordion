@@ -8,7 +8,7 @@ Accordion library for faster mobile device rendering using CSS transition instea
 http://codepen.io/kunukn/full/zBEEEq/
 
 # how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
+This uses CSS transition on height value. The height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` and the css class `ackordion--active` is added for the expanded tabpanel.
 
 # html structure
 
@@ -92,8 +92,8 @@ var config = {
   id: 'ackordion-1', 
   // optional - transition duration, default is in the css, 200ms
   duration: '600ms', 
-  // optional - default is in the css, max-height 200ms cubic-bezier(0,0,.3,1)
-  transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', 
+  // optional - default is in the css, height 200ms cubic-bezier(0,0,.3,1)
+  transition: 'height 300ms cubic-bezier(.27,.82,.29,.84)', 
   // optional - behave like a collapsible component, default true
   autoClosePrevious: false, 
   // optional - set a specific close height, default 0px
@@ -112,7 +112,7 @@ Alternatively you can apply same config to all accordions using initAll.
 ```javascript
 var config = {
   duration: '300ms',
-  transition: 'max-height 200ms cubic-bezier(.27,.82,.29,.84)',
+  transition: 'height 200ms cubic-bezier(.27,.82,.29,.84)',
   autoClosePrevious: false,
 };
 ackordion.initAll(config);
@@ -128,9 +128,9 @@ You can remove all the used memory by applying destroyAll
 
 # features
 * Small library - JS is 5kb minified and CSS is 1kb minified
-* CSS max-height transition on dynamically calculated height value
+* CSS height transition on dynamically calculated height value
 * Simple html structure with minimum CSS class usage 
-* Max-height is dynamically set and reset to auto after the animation
+* Height is dynamically set and reset to auto after the animation
 * Tabbing is supported
 * Accessibility friendly, a11y
 * Vanilla JS
@@ -151,7 +151,7 @@ Browsers which supports those should be fine. If needed the code can be refactor
 
 
 # known bugs / possible hiccups
-* Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
+* Safari 9 animates to height 0px and back to current height on change from a specific height value to height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
 # version
