@@ -106,7 +106,7 @@ window.ackordion = (function(window) {
 
                 var css = ['.ackordion[id="',
                         self.id,
-                        '"] > li:not(.ackordion--active) > section > div { height: ',
+                        '"] > li:not(.ackordion--active) > section > div { max-height: ',
                         self.closeHeight,
                         ';}'
                     ].join(''),
@@ -154,13 +154,13 @@ window.ackordion = (function(window) {
 
         function transitionEnd(event) {
 
-            if (event.propertyName == 'height') {
+            if (event.propertyName == 'max-height') {
 
-                if (element.style.height !== accordion.closeHeight) {
+                if (element.style.maxHeight !== accordion.closeHeight) {
 
                     element.classList.add('ackordion-fix-safari-bug');
 
-                    element.style.height = 'auto';
+                    element.style.maxHeight = 'none';
                     setTimeout(function() {
                         element.classList.remove('ackordion-fix-safari-bug');
                     }, 0);
@@ -170,15 +170,15 @@ window.ackordion = (function(window) {
         }
 
 
-        // Using this technique because Safari has double animation bug when property is later set again
+        // Using this technique because Safari has double animation bug when max-height is later set again
         // http://stackoverflow.com/q/27806229/815507
         element.classList.add('ackordion-fix-safari-bug');
 
-        element.style.height = 'auto';
+        element.style.maxHeight = 'none';
 
         var BCR = element.getBoundingClientRect();
 
-        element.style.height = accordion.closeHeight;
+        element.style.maxHeight = accordion.closeHeight;
 
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
@@ -187,7 +187,7 @@ window.ackordion = (function(window) {
         element.classList.remove('ackordion-fix-safari-bug');
 
         window.requestAnimationFrame(function() {
-            element.style.height = BCR.height + 'px';
+            element.style.maxHeight = BCR.height + 'px';
         });
     }
 
@@ -197,14 +197,14 @@ window.ackordion = (function(window) {
             return;
 
         function transitionEnd(event) {
-            if (event.propertyName == 'height') {
+            if (event.propertyName == 'max-height') {
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
         }
 
         element.classList.add('ackordion-fix-safari-bug');
 
-        element.style.height = 'auto';
+        element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect(),
             height = BCR.height;
 
@@ -214,7 +214,7 @@ window.ackordion = (function(window) {
             return;
         }
 
-        element.style.height = height + 'px';
+        element.style.maxHeight = height + 'px';
 
         /*
         if (!ackordion.isTransitionEndDisabled)
@@ -225,7 +225,7 @@ window.ackordion = (function(window) {
         element.classList.remove('ackordion-fix-safari-bug');
 
         window.requestAnimationFrame(function() {
-            element.style.height = accordion.closeHeight;
+            element.style.maxHeight = accordion.closeHeight;
         });
     }
 
@@ -235,7 +235,7 @@ window.ackordion = (function(window) {
             return;
 
         var tabpanel = getAckordionTabPanel(element),
-            root = tabpanel.parentElement,
+            root = tabpanel.parentNode,
             id = root.getAttribute('id'),
             accordion = accordions[id];
 
