@@ -1,9 +1,5 @@
 # ackordion
-VanillaJS mobile friendly accordion library
-
-# version
-* alpha 0.04 - support toggle aside
-* alpha 0.03 - fix for safari double animation
+Vanilla JS mobile friendly accordion library
 
 # about
 Accordion library for faster mobile device rendering using CSS transition instead of JS animation such as jQuery slideToggle.
@@ -42,7 +38,7 @@ Default with toggle aside
     <li role="tabpanel">
         <header>
             <label>This is a header</label>
-            <button role="tab" onclick="ackordion.toggle(this,event)">click</button>
+            <button role="tab" onclick="ackordion.toggle(this,event)">toggle</button>
         </header>
         <section>
             <div>
@@ -61,7 +57,7 @@ Default with toggle aside
 
 * ul is the root component where an id must be provided
 * li are the accordion items
-* button is the tab-panel
+* button is the toggle
 * section is the wrapper to hide the content on collapsed
 * div is the content area without padding top and bottom
 * article is used to for padding if needed, the element can be removed
@@ -120,19 +116,24 @@ ackordion.initAll(config);
 
 # supported browsers
 
-requestAnimationFrame and css max-height transition is required.
+requestAnimationFrame, transitionend event, css max-height transition and ecmascript 5 are required.
+Browsers which supports those should be fine.
 
-* Chrome - latest 4 versions
-* Firefox - latest 4 versions
-* Safari on desktop and iPhone, iPad - latest 4 versions
+* Chrome - latest 5 versions
+* Firefox - latest 5 versions
+* Safari on desktop and iPhone, iPad - latest 5 versions
 * IE11
-* Edge - latest 4 versions
-* Android Chrome - latest 4 versions
+* Edge - latest 5 versions
+* Android Chrome - latest 5 versions
 
 
 # known bugs / possible hiccups
 * Safari animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
+
+# version
+* alpha 0.04 - support toggle aside
+* alpha 0.03 - fix for safari double animation
 
 # license
 MIT
