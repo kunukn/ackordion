@@ -68,13 +68,19 @@ Default with toggle aside
 
 # usage
 
-Apply this JavaScript when the DOM is ready.
+Apply this JavaScript when the DOM is ready. The id must be provided for init.
 
 ```javascript
 ackordion.init('ackordion-1');
 ```
 
-# configuration
+Alternatively you can use initAll.
+
+```javascript
+ackordion.initAll();
+```
+
+# configuration support
 
 ```javascript
 var config = {
@@ -91,27 +97,42 @@ ackordion.isTransitionEndDisabled = true; // optional
 ```
 
 
+Alternatively you can apply same config to all accordions using initAll.
+
+```javascript
+var config = {
+  duration: '300ms', // optional - transition duration
+  transition: 'max-height 200ms cubic-bezier(.27,.82,.29,.84)', // optional - custom css transition
+  autoClosePrevious: true, // optional
+};
+ackordion.initAll(config);
+```
+
 # features
-* CSS transition on dynamically calculated height value
+* Small library - JS is 5kb minified and CSS is 1kb minified
+* CSS max-height transition on dynamically calculated height value
 * Clean simple html structure with minimum CSS class usage 
-* Max-height is dynamically set and reset after the animation
+* Max-height is dynamically set and reset to auto after the animation
 * Tabbing is supported
 * Vanilla JS
 * Multiple accordions supported
 
 
 # supported browsers
-* Chrome - latest 2 versions
-* Firefox - latest 2 versions
-* Safari on desktop and iPhone, iPad - latest 2 versions
+
+requestAnimationFrame and css max-height transition is required.
+
+* Chrome - latest 4 versions
+* Firefox - latest 4 versions
+* Safari on desktop and iPhone, iPad - latest 4 versions
 * IE11
-* Edge - latest 2 versions
-* Android Chrome - latest 2 versions
+* Edge - latest 4 versions
+* Android Chrome - latest 4 versions
 
 
 # known bugs / possible hiccups
-* Safari animates a change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
-* The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate animations.
+* Safari animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
+* The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
 # license
 MIT
