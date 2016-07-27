@@ -72,6 +72,7 @@ window.ackordion = (function(window) {
         self.previous; // previous toggled element
         self.transition;
         self.autoClosePrevious = true;
+        self.closeHeight = '0px';
 
         // Get root and contents
 
@@ -122,7 +123,7 @@ window.ackordion = (function(window) {
         }
     }
 
-    function expand(element) {
+    function expand(element, accordion) {
 
         if (!element)
             return;
@@ -131,7 +132,7 @@ window.ackordion = (function(window) {
 
             if (event.propertyName == 'max-height') {
 
-                if (element.style.maxHeight !== '0px') {
+                if (element.style.maxHeight !== accordion.closeHeight) {
 
                     // Using this technique because Safari has double animation bug when max-height is later set again
                     // http://stackoverflow.com/q/27806229/815507
@@ -150,26 +151,25 @@ window.ackordion = (function(window) {
 
         element.style.maxHeight = 'none';
         var BCR = element.getBoundingClientRect();
-        element.style.maxHeight = '0px';
+        element.style.maxHeight = accordion.closeHeight;
 
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
 
         element.offsetHeight; // force reflow to apply transition animation
 
-        element.style.maxHeight = BCR.height + 'px';
+        window.requestAnimationFrame(function() {
+            element.style.maxHeight = BCR.height + 'px';
+        });
     }
 
-    function collapse(element) {
+    function collapse(element, accordion) {
 
         if (!element)
             return;
 
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
-                if (element.style.maxHeight === '0px') {
-                    // not needed yet..
-                }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
             }
         }
@@ -196,9 +196,9 @@ window.ackordion = (function(window) {
         element.offsetHeight; // force reflow
         element.classList.remove('ackordion-fix-safari-bug');
 
-        setTimeout(function() {
-            element.style.maxHeight = '0px';
-        }, 0);
+        window.requestAnimationFrame(function() {
+            element.style.maxHeight = accordion.closeHeight;
+        });
     }
 
     function toggle(element, event) {
@@ -211,27 +211,30 @@ window.ackordion = (function(window) {
             id = root.getAttribute('id'),
             accordion = accordions[id];
 
-        tabpanel.classList.toggle(cssClassActive);
 
         var section = qs('section', tabpanel),
             content = section.firstElementChild;
 
+        // --- Begin animation 
         if (accordion && accordion.autoClosePrevious && accordion.previous && tabpanel !== accordion.previous) {
             if (accordion.previous.classList.contains(cssClassActive)) {
                 var previousContent = qs('section > div', accordion.previous);
-                collapse(previousContent);
+                collapse(previousContent, accordion);
                 accordion.previous.classList.remove(cssClassActive);
                 accordion.previous.removeAttribute('aria-expanded');
             }
         }
 
+        tabpanel.classList.toggle(cssClassActive);
+
         if (tabpanel.classList.contains(cssClassActive)) {
             tabpanel.setAttribute('aria-expanded', 'true');
-            expand(content);
+            expand(content, accordion);
         } else {
             tabpanel.removeAttribute('aria-expanded');
-            collapse(content);
+            collapse(content, accordion);
         }
+        // --- End animation
 
         // update previous
         if (accordion)
