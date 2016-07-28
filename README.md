@@ -154,6 +154,11 @@ Browsers which supports those should be fine. If needed the code can be refactor
 * Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height none. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
+# performance
+
+The max-height triggers layout, paint and composite but is faster than JS animation. 
+https://csstriggers.com/max-height
+
 # version
 * beta  0.1 - support for custom close height value 
 * alpha 0.04 - support toggle aside
