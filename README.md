@@ -65,7 +65,7 @@ Default with toggle aside
 
 # usage
 
-Check the index.html for inspiration.
+Check the **index.html** for inspiration.
 
 * Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
 * Apply the markup structure for the accordion
@@ -95,7 +95,7 @@ var config = {
   duration: '600ms', 
   // optional - default is in the css, max-height 200ms cubic-bezier(0,0,.3,1)
   transition: 'max-height 300ms cubic-bezier(.27,.82,.29,.84)', 
-  // optional - behave like a collapsible component, default true
+  // optional - close previous opened tab when a new tab is opened, default true
   autoClosePrevious: false, 
   // optional - set a specific close height, default 0px
   closeHeight: '32px',
