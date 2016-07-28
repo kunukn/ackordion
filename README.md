@@ -130,7 +130,7 @@ You can remove all the used memory by applying destroyAll
 * Small library - JS is 5kb minified and CSS is 1kb minified
 * CSS max-height transition on dynamically calculated height value
 * Simple html structure with minimum CSS class usage 
-* Max-height is dynamically set and reset to auto after the animation
+* Max-height is dynamically set and reset after the animation
 * Tabbing is supported
 * Accessibility friendly, a11y
 * Vanilla JS
@@ -151,7 +151,7 @@ Browsers which supports those should be fine. If needed the code can be refactor
 
 
 # known bugs / possible hiccups
-* Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height auto. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
+* Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height none. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
 * The expanding and collapsing animation might get out of sync if the browser is busy. This is because the animation is handled by the browser and collapsing and expanding are two separate css transition animations.
 
 # version
