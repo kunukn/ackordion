@@ -65,7 +65,7 @@ window.ackordion = (function(window) {
 
         var self = this;
 
-        // Accordion variables 
+        // Accordion variables
 
         self.root; // component element root
         self.contents = [];
@@ -243,7 +243,7 @@ window.ackordion = (function(window) {
         var section = qs('section', tabpanel),
             content = section.firstElementChild;
 
-        // --- Begin animation 
+        // --- Begin animation
         tabpanel.classList.toggle(cssClassActive);
 
         if (tabpanel.classList.contains(cssClassActive)) {
