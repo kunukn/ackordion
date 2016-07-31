@@ -2,14 +2,14 @@
 Vanilla JS mobile friendly accordion library
 
 # about
-Accordion library for faster mobile device rendering using CSS transition instead of JS animation such as jQuery slideToggle.
+Simple accordion library for faster mobile device rendering using CSS transition instead of JS animation such as jQuery slideToggle. You don't have to hardcode any height value and the accordion collapse/expand in smooth sync motion for smartphone and tablet devices.
 
 # demo
 * Basic with different configurations and custom themes http://codepen.io/kunukn/full/zBEEEq/
 * Nested accordions http://codepen.io/kunukn/full/dXKEJg/
 
 # how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
 
 # html structure
 
@@ -160,10 +160,17 @@ Browsers which supports those should be fine. If needed the code can be refactor
 The max-height triggers layout, paint and composite but is faster than JS animation. 
 https://csstriggers.com/max-height
 
+I tested this with smartphones and tablets and was happy with the result. 
+I could have aimed for `transform: translate` which might have better performance, but max-height seemed simpler to implement and more flexible for content height adaptation.
+
 # version
 * beta  0.1 - support for custom close height value 
 * alpha 0.04 - support toggle aside
 * alpha 0.03 - fix for safari double animation
+
+# credits
+The accessibility part was implemented with inspiration from: Accordion: Live Coding Session - Supercharged
+https://www.youtube.com/watch?v=P2glQ0fz7DM&ab_channel=GoogleChromeDevelopers
 
 # license
 MIT
