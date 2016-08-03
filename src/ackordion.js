@@ -21,8 +21,6 @@
 
     'use strict';
 
-    var ackordion = {};
-
     // App variables
     var document = window.document,
         console = window.console,
@@ -335,14 +333,14 @@
         }
     }
 
-    ackordion.toggle = toggle;
-    ackordion.init = init;
-    ackordion.initAll = initAll;
-    ackordion.clearPrevious = clearPrevious;
-    ackordion.isTransitionEndDisabled = false;
-    ackordion.destroy = destroy;
-    ackordion.destroyAll = destroyAll;
-
-    return ackordion;
+    return {
+        toggle: toggle,
+        init: init,
+        initAll: initAll,
+        clearPrevious: clearPrevious,
+        isTransitionEndDisabled: false,
+        destroy: destroy,
+        destroyAll: destroyAll
+    };
 
 });
