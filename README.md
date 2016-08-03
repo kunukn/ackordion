@@ -128,7 +128,7 @@ You can remove all the used memory by applying destroyAll
 
 
 # features
-* Small library - JS is 5kb minified and CSS is 1kb minified
+* Small library - JS is ~5kb minified and CSS is ~1kb minified
 * CSS max-height transition on dynamically calculated height value
 * Simple html structure with minimum CSS class usage 
 * Max-height is dynamically set and reset after the animation
