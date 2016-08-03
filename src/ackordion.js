@@ -1,14 +1,27 @@
 /*!
- * ackordion JavaScript Library v0.1
+ * ackordion JavaScript Library v0.11
  * https://github.com/kunukn/ackordion/
  *
  * Copyright Kunuk Nykjaer
  * Released under the MIT license
  */
 
-window.ackordion = (function(window) {
+/* global define, exports: true, module*/
+(function(root, factory) {
+    'use strict';
 
-    "use strict";
+    if (typeof define === 'function' && define.amd) {
+        define('ackordion', factory);
+    } else if (typeof exports === 'object') {
+        exports = module.exports = factory();
+    } else {
+        root.ackordion = factory();
+    }
+})(this, function() {
+
+    'use strict';
+
+    var ackordion = {};
 
     // App variables
     var document = window.document,
@@ -322,14 +335,14 @@ window.ackordion = (function(window) {
         }
     }
 
-    return {
-        toggle: toggle,
-        init: init,
-        initAll: initAll,
-        clearPrevious: clearPrevious,
-        isTransitionEndDisabled: false,
-        destroy: destroy,
-        destroyAll: destroyAll,
-    };
+    ackordion.toggle = toggle;
+    ackordion.init = init;
+    ackordion.initAll = initAll;
+    ackordion.clearPrevious = clearPrevious;
+    ackordion.isTransitionEndDisabled = false;
+    ackordion.destroy = destroy;
+    ackordion.destroyAll = destroyAll;
 
-})(window, undefined);
+    return ackordion;
+
+});
