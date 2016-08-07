@@ -21,6 +21,14 @@
 
     'use strict';
 
+    var EVENT_NAMES = {
+        init: 'init',
+        beforeopen: 'beforeopen',
+        afteropen: 'afteropen',
+        beforeclose: 'beforeclose',
+        afterclose: 'afterclose',
+    };
+
     // App variables
     var document = window.document,
         console = window.console,
@@ -28,8 +36,10 @@
         error = console.error.bind(console),
         cssClassActive = 'ackordion--active',
         accordions = {},
+        callbacks,
         transitionEndVendorPrefix = getTransitionEndVendorPrefixNameAsString();
 
+    initCallbacks();
 
     function qs(expr, context) {
         return (context || document).querySelector(expr);
@@ -39,19 +49,29 @@
         return [].slice.call((context || document).querySelectorAll(expr), 0);
     }
 
-    function triggerEvent(eventName, accordion, indexElement) {
-        /*
-        Events:
-            init
-            beforeopen
-            afteropen
-            beforeclose
-            afterclose
-        */
-        
-        //log(eventName);
-        //log(accordion);
-        //log(indexElement);
+    function initCallbacks() {
+        var key;
+        callbacks = {};
+        for (key in EVENT_NAMES)
+            if (EVENT_NAMES.hasOwnProperty(key)) {
+                callbacks[EVENT_NAMES[key]] = [];
+            }
+    }
+
+    function addCallbackForEvent(eventName, cb) {
+        var collection = callbacks[(eventName = eventName.toLowerCase())];
+        if (collection && typeof cb === 'function') {
+            collection.push(cb);
+        }
+    };
+
+    function triggerEvent(eventName, accordion, item) {
+        var collection = callbacks[eventName] || [],
+            i, max;
+
+        for (i = 0, max = collection.length; i < max; i++) {
+            collection[i].call(this, eventName, accordion, item);
+        }
     }
 
     function getAckordionTabPanel(element) {
@@ -334,6 +354,7 @@
             accordions[id] = undefined;
         });
         accordions = {};
+        initCallbacks();
     }
 
     function init(config) {
@@ -363,6 +384,7 @@
         initAll: initAll,
         clearPrevious: clearPrevious,
         isTransitionEndDisabled: false,
+        addCallbackForEvent: addCallbackForEvent,
         destroy: destroy,
         destroyAll: destroyAll
     };
