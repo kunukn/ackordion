@@ -6,7 +6,7 @@ Simple accordion library for faster mobile device rendering using CSS transition
 
 # demo
 * Basic with different configurations and custom themes http://codepen.io/kunukn/full/zBEEEq/
-* Nested accordions http://codepen.io/kunukn/full/dXKEJg/
+* Nested accordions with inert support http://codepen.io/kunukn/full/dXKEJg/
 
 # how does it work?
 This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
