@@ -75,9 +75,13 @@ Check the **index.html** for inspiration.
 Apply this JavaScript when the DOM is ready for a single accordion. 
 The id must match the one in the html markup.
 
+## init
+
 ```javascript
 ackordion.init('ackordion-1');
 ```
+
+## init all
 
 Alternatively you can use initAll.
 
@@ -86,6 +90,8 @@ ackordion.initAll();
 ```
 
 # configuration support
+
+## init
 
 ```javascript
 var config = {
@@ -107,6 +113,7 @@ ackordion.init(config);
 ackordion.isTransitionEndDisabled = true; // optional, default false
 ```
 
+## init all
 
 Alternatively you can apply same config to all accordions using initAll.
 
@@ -118,6 +125,8 @@ var config = {
 };
 ackordion.initAll(config);
 ```
+
+## event callbacks
 
 Add callbacks when accordion has changed to opened or closed state
 
@@ -140,6 +149,7 @@ Add callbacks when accordion has changed to opened or closed state
         });
 ```
 
+## cleanup memory on remove
 
 If you later want to remove an accordion from your page you can remove the used memory.
 
