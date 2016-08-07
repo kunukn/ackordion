@@ -75,13 +75,13 @@ Check the **index.html** for inspiration.
 Apply this JavaScript when the DOM is ready for a single accordion. 
 The id must match the one in the html markup.
 
-## init
+### init
 
 ```javascript
 ackordion.init('ackordion-1');
 ```
 
-## init all
+### init all
 
 Alternatively you can use initAll.
 
@@ -91,7 +91,7 @@ ackordion.initAll();
 
 # configuration support
 
-## init
+### init
 
 ```javascript
 var config = {
@@ -113,7 +113,7 @@ ackordion.init(config);
 ackordion.isTransitionEndDisabled = true; // optional, default false
 ```
 
-## init all
+### init all
 
 Alternatively you can apply same config to all accordions using initAll.
 
@@ -126,7 +126,7 @@ var config = {
 ackordion.initAll(config);
 ```
 
-## event callbacks
+### event callbacks
 
 Possible callback event binding
 
@@ -167,7 +167,7 @@ E.g. add callbacks when accordion has changed to opened or closed state
         });
 ```
 
-## cleanup memory on remove
+### cleanup memory on remove
 
 If you later want to remove an accordion from your page you can remove the used memory.
 
@@ -215,6 +215,7 @@ I tested this with smartphones and tablets and was happy with the result.
 I could have aimed for `transform: translate` which might have better performance, but max-height seemed simpler to implement and more flexible for content height adaptation.
 
 # version
+* beta 0.11 - support for event callbacks
 * beta  0.1 - support for custom close height value 
 * alpha 0.04 - support toggle aside
 * alpha 0.03 - fix for safari double animation
