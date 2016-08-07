@@ -39,6 +39,21 @@
         return [].slice.call((context || document).querySelectorAll(expr), 0);
     }
 
+    function triggerEvent(eventName, accordion, indexElement) {
+        /*
+        Events:
+            init
+            beforeopen
+            afteropen
+            beforeclose
+            afterclose
+        */
+        
+        //log(eventName);
+        //log(accordion);
+        //log(indexElement);
+    }
+
     function getAckordionTabPanel(element) {
         var root = element;
         while (root) {
@@ -156,12 +171,16 @@
             }
             accordions[id] = self;
         }
+
+        triggerEvent('init', self);
     }
 
     function expand(element, accordion) {
 
         if (!element)
             return;
+
+        triggerEvent('beforeopen', accordion, element);
 
         function transitionEnd(event) {
 
@@ -174,6 +193,7 @@
                     element.style.maxHeight = 'none';
                     setTimeout(function() {
                         element.classList.remove('ackordion-fix-safari-bug');
+                        triggerEvent('afteropen', accordion, element);
                     }, 0);
                 }
                 element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
@@ -207,9 +227,13 @@
         if (!element)
             return;
 
+        triggerEvent('beforeclose', accordion, element);
+
         function transitionEnd(event) {
             if (event.propertyName == 'max-height') {
-                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false)
+                triggerEvent('afterclose', accordion, element);
+
+                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
             }
         }
 
@@ -222,15 +246,15 @@
         if (height === 0 || (height + 'px') === accordion.closeHeight) {
             // Already collapsed, then stop here
             element.classList.remove('ackordion-fix-safari-bug');
+            triggerEvent('afterclose', accordion, element);
             return;
         }
 
         element.style.maxHeight = height + 'px';
 
-        /*
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
-        */
+
 
         element.offsetHeight; // force reflow
         element.classList.remove('ackordion-fix-safari-bug');
