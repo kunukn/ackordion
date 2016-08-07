@@ -119,6 +119,28 @@ var config = {
 ackordion.initAll(config);
 ```
 
+Add callbacks when accordion has changed to opened or closed state
+
+```javascript
+  ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
+            console.log('event triggered');
+            console.log(eventName);
+            console.log('on accordion');
+            console.log(accordion);
+            console.log('on item');
+            console.log(item);
+        });
+        ackordion.addCallbackForEvent('afterclose', function(eventName, accordion, item) {
+            console.log('event triggered');
+            console.log(eventName);
+            console.log('on accordion');
+            console.log(accordion);
+            console.log('on item');
+            console.log(item);
+        });
+```
+
+
 If you later want to remove an accordion from your page you can remove the used memory.
 
 E.g. `ackordion.destroy('the-accordion-id');`
@@ -128,16 +150,16 @@ You can remove all the used memory by applying destroyAll
 
 
 # features
-* Small library - JS is ~5kb minified and CSS is ~1kb minified
+* Small library - JS is ~7kb minified and CSS is ~1kb minified
 * Support for AMD and CommonJS
+* Callback support for events: init, beforeopen, afteropen, beforeclose, afterclose
 * CSS max-height transition on dynamically calculated height value
 * Simple html structure with minimum CSS class usage 
 * Max-height is dynamically set and reset after the animation
 * Tabbing is supported
 * Accessibility friendly, a11y
-* Vanilla JS
 * Multiple accordions supported
-
+* Vanilla JS
 
 # supported browsers
 
