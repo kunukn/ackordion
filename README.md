@@ -128,7 +128,25 @@ ackordion.initAll(config);
 
 ## event callbacks
 
-Add callbacks when accordion has changed to opened or closed state
+Possible callback event binding
+
+* init
+* beforeopen
+* afteropen
+* beforeclose
+* afterclose
+
+E.g. add callbacks when an accordion has been initiated
+```javascript
+  ackordion.addCallbackForEvent('init', function(eventName, accordion) {
+            console.log('event triggered');
+            console.log(eventName);
+            console.log('on accordion');
+            console.log(accordion);
+        });
+```
+
+E.g. add callbacks when accordion has changed to opened or closed state
 
 ```javascript
   ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
