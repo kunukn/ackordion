@@ -172,7 +172,13 @@
     <script>
         // ackordion.isTransitionEndDisabled = true;
 
-        ackordion.init('ackordion-1');
+
+        ackordion.addCallbackForEvent('init', function(eventName, accordion) {
+            console.log('event triggered');
+            console.log(eventName);
+            console.log('on accordion');
+            console.log(accordion);
+        });
         ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
             console.log('event triggered');
             console.log(eventName);
@@ -190,17 +196,16 @@
             console.log(item);
         });
 
+        ackordion.init('ackordion-1');
         ackordion.init({
             id: 'ackordion-2',
             closeHeight: '32px',
             duration: '300ms',
         });
-
         ackordion.init({
             id: 'ackordion-3',
             duration: '600ms',
         });
-
         ackordion.init({
             id: 'ackordion-4',
             autoClosePrevious: false,
