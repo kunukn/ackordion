@@ -1,0 +1,320 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ackordion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ackordion.css">
+    <link rel="stylesheet" href="ackordion--theme-green.css">
+    <link rel="stylesheet" href="ackordion--theme-blue.css">
+    <link rel="stylesheet" href="ackordion--theme-red.css">
+    <style>
+        .ackordion {
+            border: none;
+        }
+        
+        .ackordion > li > header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ackordion > li > header > label {
+            font-weight: bold;
+        }
+        
+        .ackordion > li > header button[role=tab] {
+            border-radius: 50%;
+            margin-right: .5rem;
+            width: 2rem;
+            height: 2rem;
+            position: relative;
+            font-size: 0;
+            overflow: hidden;
+            transform-origin: 50% 50%;
+            transition: 200ms cubic-bezier(0, 0, 0.3, 1);
+            box-shadow: 0 2px 4px gray;
+        }
+        
+        .ackordion > li > header button[role=tab]:focus {
+            background: black;
+        }
+        
+        .ackordion > li > header button[role=tab]:focus:before,
+        .ackordion > li > header button[role=tab]:focus:after {
+            background: dodgerblue;
+        }
+        
+        .ackordion > li > header button[role=tab]:before,
+        .ackordion > li > header button[role=tab]:after {
+            content: '';
+            display: block;
+            position: absolute;
+            background: white;
+            border-radius: 2px;
+            width: 2px;
+            height: 40%;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transition: 200ms cubic-bezier(0, 0, 0.3, 1);
+        }
+        
+        .ackordion > li > header button[role=tab]:before {
+            margin-left: 1px;
+            transform: translate(-50%, -50%) rotate(-50deg);
+        }
+        
+        .ackordion > li > header button[role=tab]:after {
+            margin-left: -1px;
+            transform: translate(-50%, -50%) rotate(50deg);
+        }
+        
+        .ackordion > .ackordion--active > header > button[role=tab]:before {
+            transform-origin: 50% 0%;
+            margin-left: -1px;
+        }
+        
+        .ackordion > .ackordion--active > header > button[role=tab]:after {
+            transform-origin: 50% 0%;
+            margin-left: 1px;
+        }
+        
+        .ackordion .ackordion {
+            margin-top: 1rem;
+            border-color: #aaa;
+            border: none;
+        }
+        
+        .ackordion .ackordion > li + li {
+            border: 0;
+            border-top: 1px solid #aaa;
+        }
+        
+        .ackordion .ackordion > li > header > label {
+            font-weight: normal;
+        }
+        
+        .ackordion .ackordion > li > header button[role=tab] {
+            background: #ccc;
+            color: black;
+        }
+        
+        .ackordion .ackordion > li > header button[role=tab]:hover {
+            background: #bbb;
+        }
+        
+        .ackordion .ackordion > li > header button[role=tab]:focus {
+            background: #aaa;
+        }
+        
+        html {
+            font-size: 100%;
+        }
+        
+        body {
+            font-family: sans-serif;
+            position: relative;
+            min-height: 100vh;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 0;
+            padding: 1rem 0;
+        }
+        
+        .divider {
+            height: 2rem;
+        }
+        
+        .page-info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            opacity: .5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Nested collapsibles with inert support</h1>
+    <ul role="tablist" class="ackordion" id="ackordion-1">
+        <li role="tabpanel">
+            <header>
+                <label>fruit</label>
+                <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+            </header>
+            <section>
+                <div>
+                    <article>In botany, a fruit is the seed-bearing structure in flowering plants (also known as angiosperms) formed from the ovary after flowering.
+                        <ul role="tablist" class="ackordion" id="ackordion-1-1">
+                            <li role="tabpanel">
+                                <header>
+                                    <label>apple</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.
+                                        </article>
+                                    </div>
+                                </section>
+                            </li>
+                            <li role="tabpanel">
+                                <header>
+                                    <label>banana</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa. In some countries, bananas used for cooking may be called plantains.
+                                        </article>
+                                    </div>
+                                </section>
+                            </li>
+                            <li role="tabpanel">
+                                <header>
+                                    <label>orange</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae.</article>
+                                    </div>
+                                </section>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+        </li>
+        <li role="tabpanel">
+            <header>
+                <label>vegetable</label>
+                <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+            </header>
+            <section>
+                <div>
+                    <article>
+                        In everyday usage, a vegetable is any part of a plant that is consumed by humans as food as part of a savory meal. The term "vegetable" is somewhat arbitrary, and largely defined through culinary and cultural tradition.
+
+                        <ul role="tablist" class="ackordion" id="ackordion-1-2">
+                            <li role="tabpanel">
+                                <header>
+                                    <label>potato</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The potato is a starchy, tuberous crop from the perennial nightshade Solanum tuberosum L. The word "potato" may refer either to the plant itself or to the edible tuber.
+                                        </article>
+                                    </div>
+                                </section>
+                            </li>
+                            <li role="tabpanel">
+                                <header>
+                                    <label>onion</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The onion (Allium cepa L., from Latin cepa "onion"), also known as the bulb onion or common onion, is a vegetable and is the most widely cultivated species of the genus Allium.
+                                        </article>
+                                    </div>
+                                </section>
+                            </li>
+                            <li role="tabpanel">
+                                <header>
+                                    <label>carrot</label>
+                                    <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+                                </header>
+                                <section>
+                                    <div>
+                                        <article>
+                                            The carrot (Daucus carota subsp. sativus) is a root vegetable, usually orange in colour, though purple, black, red, white, and yellow varieties exist.
+                                        </article>
+                                    </div>
+                                </section>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+        </li>
+        <li role="tabpanel">
+            <header>
+                <label>tree</label>
+                <button role="tab" onclick="ackordion.toggle(this)">toggle</button>
+            </header>
+            <section>
+                <div>
+                    <article>
+                        In botany, a tree is a perennial plant with an elongated stem, or trunk, supporting branches and leaves in most species. In some usages, the definition of a tree may be narrower, including only woody plants with secondary growth, plants that are usable
+                        as lumber or plants above a specified height.
+                    </article>
+                </div>
+            </section>
+        </li>
+    </ul>
+
+    <div class="divider"></div>
+    <section class="page-info">
+        <a target="_blank" href="//github.com/kunukn/ackordion">github.com/kunukn/ackordion</a>
+    </section>
+
+    <script src="https://cdn.rawgit.com/WICG/inert/master/inert.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="ackordion.js"></script>
+    <script>
+        function qs(expr, context) {
+            return (context || document).querySelector(expr);
+        }
+
+        function qsa(expr, context) {
+            return [].slice.call((context || document).querySelectorAll(expr), 0);
+        }
+
+        // Support for inert
+        // what is inert?
+        // see this video
+        // https://www.youtube.com/watch?v=fGLp_gfMMGU&ab_channel=GoogleChromeDevelopers
+
+        ackordion.addCallbackForEvent('init', function(eventName, accordion) {
+            var element = document.getElementById(accordion.id);;
+            var children = qsa('.ackordion', element);
+            if (children && children.length) {
+                var divs = qsa('[id="' + accordion.id + '"] > li > section > div', element);
+                divs.forEach(function(div) {
+                    div.inert = true;
+                });
+            }
+        });
+
+        ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
+            item.inert = false;
+        });
+        ackordion.addCallbackForEvent('afterclose', function(eventName, accordion, item) {
+            item.inert = true;
+        });
+
+        // Library init
+        ackordion.initAll({
+            autoClosePrevious: false,
+            duration: '200ms',
+        });
+
+        // Custom other script
+        if (window.FastClick)
+            FastClick.attach(document.body);
+    </script>
+</body>

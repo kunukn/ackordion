@@ -294,12 +294,14 @@
             id = root.getAttribute('id'),
             accordion = accordions[id];
 
-
         var section = qs('section', tabpanel),
             content = section.firstElementChild;
 
         // --- Begin animation
         tabpanel.classList.toggle(cssClassActive);
+
+        if (!accordion)
+            return;
 
         if (tabpanel.classList.contains(cssClassActive)) {
             tabpanel.setAttribute('aria-expanded', 'true');
