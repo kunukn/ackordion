@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ackordion.css">
     <style>
+        *[inert] {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+        
         body {
             font-family: sans-serif;
             min-height: 2000px;
