@@ -7,9 +7,6 @@
     <title>ackordion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ackordion.css">
-    <link rel="stylesheet" href="ackordion--theme-green.css">
-    <link rel="stylesheet" href="ackordion--theme-blue.css">
-    <link rel="stylesheet" href="ackordion--theme-red.css">
     <style>
         body {
             font-family: sans-serif;
@@ -20,6 +17,79 @@
         h1 {
             text-align: center;
             margin: 3rem 0 1rem;
+        }
+        
+        .ackordion--theme-blue button[role=tab] {
+            background: #039BE5;
+        }
+        
+        .ackordion--theme-blue button[role=tab]:hover {
+            background: #038acc;
+        }
+        
+        .ackordion--theme-blue button[role=tab]:focus {
+            background: #0279b3;
+        }
+        
+        .ackordion--theme-blue > li > section > div {
+            background: #222;
+            color: white;
+        }
+        
+        .ackordion--theme-green > li > section > div {
+            padding: 0 1rem;
+        }
+        
+        .ackordion--theme-green > li > section > div::before,
+        .ackordion--theme-green > li > section > div::after {
+            content: '';
+            display: block;
+            height: 1rem;
+        }
+        
+        .ackordion--theme-green button[role=tab] {
+            background: #689F38;
+        }
+        
+        .ackordion--theme-green button[role=tab]:hover {
+            background: #5c8c31;
+        }
+        
+        .ackordion--theme-green button[role=tab]:focus {
+            background: #4f792b;
+        }
+        
+        .ackordion--theme-green > li > section > div {
+            background: #222;
+            color: white;
+        }
+        
+        .ackordion--theme-red button[role=tab] {
+            background: #FF5722;
+        }
+        
+        .ackordion--theme-red button[role=tab]:hover {
+            background: #ff4409;
+        }
+        
+        .ackordion--theme-red button[role=tab]:focus {
+            background: #ee3900;
+        }
+        
+        .ackordion--theme-red > li > section > div {
+            background: linear-gradient(180deg, rgba(255, 87, 34, 0.1), white);
+        }
+        
+        .ackordion--theme-red > li > section > div > * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ackordion--theme-red > li > section > div::first-letter {
+            font-size: 200%;
+            font-weight: bold;
+            color: #FF5722;
+            padding-right: .2rem;
         }
     </style>
 </head>
@@ -174,22 +244,19 @@
 
 
         ackordion.addCallbackForEvent('init', function(eventName, accordion) {
-            console.log('event triggered');
-            console.log(eventName);
+            console.log('event triggered: ' + eventName);
             console.log('on accordion');
             console.log(accordion);
         });
         ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
-            console.log('event triggered');
-            console.log(eventName);
+            console.log('event triggered: ' + eventName);
             console.log('on accordion');
             console.log(accordion);
             console.log('on item');
             console.log(item);
         });
         ackordion.addCallbackForEvent('afterclose', function(eventName, accordion, item) {
-            console.log('event triggered');
-            console.log(eventName);
+            console.log('event triggered: ' + eventName);
             console.log('on accordion');
             console.log(accordion);
             console.log('on item');

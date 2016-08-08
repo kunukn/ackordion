@@ -7,9 +7,6 @@
     <title>ackordion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ackordion.css">
-    <link rel="stylesheet" href="ackordion--theme-green.css">
-    <link rel="stylesheet" href="ackordion--theme-blue.css">
-    <link rel="stylesheet" href="ackordion--theme-red.css">
     <style>
         .ackordion {
             border: none;
@@ -300,10 +297,10 @@
             }
         });
 
-        ackordion.addCallbackForEvent('afteropen', function(eventName, accordion, item) {
+        ackordion.addCallbackForEvent('beforeopen', function(eventName, accordion, item) {
             item.inert = false;
         });
-        ackordion.addCallbackForEvent('afterclose', function(eventName, accordion, item) {
+        ackordion.addCallbackForEvent('beforeclose', function(eventName, accordion, item) {
             item.inert = true;
         });
 
