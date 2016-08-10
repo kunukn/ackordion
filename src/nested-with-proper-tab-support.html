@@ -282,8 +282,6 @@
         <a target="_blank" href="//github.com/kunukn/ackordion">github.com/kunukn/ackordion</a>
     </section>
 
-
-    <script src="//cdn.rawgit.com/WICG/inert/master/inert.js?v=1"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
     <script src="ackordion.js"></script>
     <script>
@@ -295,27 +293,28 @@
             return [].slice.call((context || document).querySelectorAll(expr), 0);
         }
 
-        // Support for inert
-        // what is inert?
-        // see this video
-        // https://www.youtube.com/watch?v=fGLp_gfMMGU&ab_channel=GoogleChromeDevelopers
 
         ackordion.addCallbackForEvent('init', function(eventName, accordion) {
-            var element = document.getElementById(accordion.id);;
-            var children = qsa('.ackordion', element);
+            var element = document.getElementById(accordion.id),
+                children = qsa('.ackordion', element),
+                article,
+                divs;
             if (children && children.length) {
-                var divs = qsa('[id="' + accordion.id + '"] > li > section > div', element);
+                divs = qsa('[id="' + accordion.id + '"] > li > section > div', element);
                 divs.forEach(function(div) {
-                    div.inert = true;
+                    article = qs('article', div);
+                    article.style.display = 'none';
                 });
             }
         });
 
         ackordion.addCallbackForEvent('beforeopen', function(eventName, accordion, item) {
-            item.inert = false;
+            var article = qs('article', item);
+            article.style.display = 'block';
         });
-        ackordion.addCallbackForEvent('beforeclose', function(eventName, accordion, item) {
-            item.inert = true;
+        ackordion.addCallbackForEvent('afterclose', function(eventName, accordion, item) {
+            var article = qs('article', item);
+            article.style.display = 'none';
         });
 
         // Library init
