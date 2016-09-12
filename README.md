@@ -177,6 +177,13 @@ E.g. `ackordion.destroy('the-accordion-id');`
 You can remove all the used memory by applying destroyAll
 `ackordion.destroyAll();`
 
+# development
+* Git clone the project or download it
+* npm install
+* npm run start
+
+For minification 
+* npm run deploy
 
 # features
 * Small library - JS is ~7kb minified and CSS is ~1kb minified
