@@ -222,12 +222,6 @@ https://csstriggers.com/max-height
 I tested this with smartphones and tablets and was happy with the result. 
 I could have aimed for `transform: translate` which might have better performance, but max-height seemed simpler to implement and more flexible for content height adaptation.
 
-# version
-* beta 0.11 - support for event callbacks
-* beta  0.1 - support for custom close height value 
-* alpha 0.04 - support toggle aside
-* alpha 0.03 - fix for safari double animation
-
 # credits
 The accessibility part was implemented with inspiration from: Accordion: Live Coding Session - Supercharged
 https://www.youtube.com/watch?v=P2glQ0fz7DM&ab_channel=GoogleChromeDevelopers
