@@ -1,5 +1,5 @@
 /*!
- * ackordion JavaScript Library v0.11
+ * ackordion JavaScript Library 1.0.4
  * https://github.com/kunukn/ackordion/
  *
  * Copyright Kunuk Nykjaer
