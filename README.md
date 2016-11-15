@@ -9,6 +9,12 @@ Simple accordion library for faster mobile device rendering using CSS transition
 * Nested accordions with inert support http://codepen.io/kunukn/full/dXKEJg/
 * Nested accordions with proper tab support http://codepen.io/kunukn/full/bZOdjx/
 
+# browser support
+
+| <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/archive/chrome-android_18-36/chrome-android_18-36_48x48.png" width="48px" height="48px" alt="Chrome logo"> | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/archive/opera_10-14/opera_10-14_48x48.png" width="48px" height="48px" alt="Opera logo"> | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/archive/safari_1-7/safari_1-7_48x48.png" width="48px" height="48px" alt="Safari logo"> | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/edge/edge_48x48.png" width="48px" height="48px" alt="Edge logo"> | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/archive/firefox_1.5-3/firefox_1.5-3_48x48.png" width="48px" height="48px" alt="Firefox logo"> | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/37.2.0/internet-explorer/internet-explorer_48x48.png" width="48px" height="48px" alt="IE logo"> 
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 50+ ✅ | 40+ ✅ | 9+ ✅ |12+ ✅ |40+ ✅ | 11+ ✅ |
+
 # how does it work?
 This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
 
