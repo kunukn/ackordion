@@ -4,7 +4,7 @@
   "description": "VanillaJS mobile friendly accordion library",
   "main": "index.js",
   "scripts": {
-    "start": "cd src && browser-sync start --server --files '*.*' --no-ghost-mode",
+    "start": "cd src && browser-sync start --server --files \"*.*\" --no-ghost-mode",
     "clean": "rimraf dist/*",
     "minifyjs": "uglifyjs src/ackordion.js -c -o dist/ackordion.min.js",
     "minifycss": "cleancss src/ackordion.css -o dist/ackordion.min.css",

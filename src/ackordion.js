@@ -37,7 +37,7 @@
         cssClassActive = 'ackordion--active',
         accordions = {},
         callbacks,
-        transitionEndVendorPrefix = getTransitionEndVendorPrefixNameAsString();
+        transitionEndName = getTransitionEndVendorPrefixNameAsString();
 
     initCallbacks();
 
@@ -47,6 +47,16 @@
 
     function qsa(expr, context) {
         return [].slice.call((context || document).querySelectorAll(expr), 0);
+    }
+
+    function rAF(callback) {
+        window.requestAnimationFrame(callback);
+    }
+
+    function nextFrame(callback) {
+        window.requestAnimationFrame(function() {
+            window.requestAnimationFrame(callback);
+        });
     }
 
     function initCallbacks() {
@@ -216,7 +226,7 @@
                         triggerEvent('afteropen', accordion, element);
                     }, 0);
                 }
-                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
+                element.removeEventListener(transitionEndName, transitionEnd, false);
             }
         }
 
@@ -232,13 +242,13 @@
         element.style.maxHeight = accordion.closeHeight;
 
         if (!ackordion.isTransitionEndDisabled)
-            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
-
-        element.offsetHeight; // force reflow to apply transition animation
-        element.classList.remove('ackordion-fix-safari-bug');
-
-        window.requestAnimationFrame(function() {
-            element.style.maxHeight = BCR.height + 'px';
+            element.addEventListener(transitionEndName, transitionEnd, false);
+        
+        nextFrame(function() {
+            element.classList.remove('ackordion-fix-safari-bug');
+            rAF(function() {
+                element.style.maxHeight = BCR.height + 'px';
+            });
         });
     }
 
@@ -253,7 +263,7 @@
             if (event.propertyName == 'max-height') {
                 triggerEvent('afterclose', accordion, element);
 
-                element.removeEventListener(transitionEndVendorPrefix, transitionEnd, false);
+                element.removeEventListener(transitionEndName, transitionEnd, false);
             }
         }
 
@@ -273,15 +283,15 @@
         element.style.maxHeight = height + 'px';
 
         if (!ackordion.isTransitionEndDisabled)
-            element.addEventListener(transitionEndVendorPrefix, transitionEnd, false);
+            element.addEventListener(transitionEndName, transitionEnd, false);
 
-
-        element.offsetHeight; // force reflow
-        element.classList.remove('ackordion-fix-safari-bug');
-
-        window.requestAnimationFrame(function() {
-            element.style.maxHeight = accordion.closeHeight;
-        });
+        
+        nextFrame(function() {
+            element.classList.remove('ackordion-fix-safari-bug');
+            rAF(function() {
+                element.style.maxHeight = accordion.closeHeight;
+            });
+        });            
     }
 
     function toggle(element) {
