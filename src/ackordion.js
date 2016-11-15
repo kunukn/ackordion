@@ -37,7 +37,7 @@
         cssClassActive = 'ackordion--active',
         accordions = {},
         callbacks,
-        transitionEndName = getTransitionEndVendorPrefixNameAsString();
+        transitionEndName = 'transitionend';
 
     initCallbacks();
 
@@ -92,24 +92,6 @@
                 return root;
         }
         return undefined;
-    }
-
-    function getTransitionEndVendorPrefixNameAsString() {
-        var t,
-            el = document.createElement('div'),
-            transitions = {
-                'transition': 'transitionend',
-                'OTransition': 'oTransitionEnd',
-                'MozTransition': 'transitionend',
-                'WebkitTransition': 'webkitTransitionEnd',
-            };
-
-        for (t in transitions) {
-            if (el.style[t] !== undefined) {
-                return transitions[t];
-            }
-        }
-        return 'transitionend';
     }
 
     var Accordion = function(config) {
@@ -243,7 +225,7 @@
 
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndName, transitionEnd, false);
-        
+
         nextFrame(function() {
             element.classList.remove('ackordion-fix-safari-bug');
             rAF(function() {
@@ -285,13 +267,13 @@
         if (!ackordion.isTransitionEndDisabled)
             element.addEventListener(transitionEndName, transitionEnd, false);
 
-        
+
         nextFrame(function() {
             element.classList.remove('ackordion-fix-safari-bug');
             rAF(function() {
                 element.style.maxHeight = accordion.closeHeight;
             });
-        });            
+        });
     }
 
     function toggle(element) {
