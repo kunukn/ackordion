@@ -15,10 +15,25 @@ Simple accordion library for faster mobile device rendering using CSS transition
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | 50+ ✅ | 40+ ✅ | 9+ ✅ | 40+ ✅ | 12+ ✅ | 11+ ✅ |
 
-# how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
 
-# html structure
+# npm
+
+https://www.npmjs.com/package/ackordion
+
+# usage
+
+Check the **index.html** for inspiration.
+
+* Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
+* Apply the markup structure for the accordion
+* Init the accordion with JS
+* Apply custom css to override the library css
+
+Apply this JavaScript when the DOM is ready for a single accordion. 
+The id must match the one in the html markup.
+
+
+### html structure
 
 Default
 ```html
@@ -70,17 +85,6 @@ Default with toggle aside
 * **div** is the content area without padding top and bottom
 * **article** is used to for padding if needed, the element can be removed
 
-# usage
-
-Check the **index.html** for inspiration.
-
-* Add reference to `ackordion.min.js` and `ackordion.min.css` in the html page
-* Apply the markup structure for the accordion
-* Init the accordion with JS
-* Apply custom css to override the library css
-
-Apply this JavaScript when the DOM is ready for a single accordion. 
-The id must match the one in the html markup.
 
 ### init
 
@@ -205,16 +209,11 @@ For minification
 
 # supported browsers
 
-requestAnimationFrame (rAF), transitionend event, css max-height transition and Ecmascript 5 are required.
-Browsers which supports those should be fine. If needed the code can be refactored to exclude usage of rAF and transitionend. 
+Browsers which supports requestAnimationFrame (rAF), transitionend event, css max-height transition and Ecmascript 5.
 
-* Chrome - latest 5 versions
-* Firefox - latest 5 versions
-* Safari on desktop and iPhone, iPad - latest 5 versions
-* IE10 (not tested), IE11
-* Edge - latest 5 versions
-* Android Chrome - latest 5 versions
 
+# how does it work?
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings. When an item is expanded the attribute is set `aria-expanded=true` for the expanded tabpanel.
 
 # known bugs / possible hiccups
 * Safari 9 animates to height 0px and back to current height on change from a specific max-height value to max-height none. This should not happen and is a browser bug. This has been fixed by using a temporary css class.
