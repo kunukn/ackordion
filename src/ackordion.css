@@ -14,36 +14,35 @@
     /* http://stackoverflow.com/q/27806229/815507 */
 }
 
-.ackordion > li + li {
+.ackordion>li+li {
     border-top: 2px solid black;
 }
 
-.ackordion > li:not(.ackordion--active) > section > div {
+.ackordion>li:not(.ackordion--active)>section>div {
     max-height: 0px;
 }
 
-.ackordion > li > section {
+.ackordion>li>section {
     font-size: inherit;
     overflow: hidden;
     display: block;
 }
 
-.ackordion > li > section > div {
+.ackordion>li>section>div {
     padding: 0;
     /* don't set padding-top or padding-bottom here, use inner element instead */
     -webkit-transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
     transition: max-height cubic-bezier(0, 0, .3, 1) 200ms;
     transform: translateZ(0);
     will-change: max-height;
-    -webkit-backface-visibility: hidden;
 }
 
-.ackordion > li > section > div > article {
+.ackordion>li>section>div>article {
     padding: 1rem 1rem;
 }
 
 .ackordion button[role=tab] {
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     width: 100%;
     transition: cubic-bezier(0, 0, .3, 1) 200ms;
     background: #444;
@@ -58,20 +57,18 @@
     outline: none;
 }
 
-.ackordion > li > header {
+.ackordion>li>header {
     overflow: hidden;
 }
 
-.ackordion > li > header > label {
-    padding: 1rem;
-    display: inline-block;
+.ackordion>li>header>label {
+    padding: 1rem;    
     float: left;
     text-transform: uppercase;
 }
 
-.ackordion > li > header button[role=tab] {
-    float: right;
-    display: inline-block;
+.ackordion>li>header button[role=tab] {
+    float: right;    
     width: auto;
     outline: none;
 }
