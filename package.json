@@ -2,7 +2,7 @@
     "name": "ackordion",
     "version": "1.0.4",
     "description": "VanillaJS mobile friendly accordion library",
-    "main": "src/arkordion.js",
+    "main": "src/ackordion.js",
     "scripts": {
         "start": "cd src && browser-sync start --server --files \"*.*\" --no-ghost-mode",
         "clean": "rimraf dist/*",
