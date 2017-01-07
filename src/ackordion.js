@@ -196,7 +196,7 @@
 
         function transitionEnd(event) {
 
-            if (event.propertyName == 'max-height') {
+            if (event.propertyName === 'max-height') {
 
                 if (element.style.maxHeight !== accordion.closeHeight) {
 
@@ -242,7 +242,7 @@
         triggerEvent('beforeclose', accordion, element);
 
         function transitionEnd(event) {
-            if (event.propertyName == 'max-height') {
+            if (event.propertyName === 'max-height') {
                 triggerEvent('afterclose', accordion, element);
 
                 element.removeEventListener(transitionEndName, transitionEnd, false);
