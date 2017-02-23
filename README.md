@@ -190,7 +190,7 @@ You can remove all the used memory by applying destroyAll
 # development
 * Git clone the project or download it
 * npm install
-* npm run start
+* npm start
 
 For minification 
 * npm run deploy
