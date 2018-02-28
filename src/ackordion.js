@@ -136,9 +136,9 @@
       self.closeHeight = config.closeHeight || '0px';
 
       /*
-                If close height is value larger than 0, e.g. 36px
-                Then override css library by adding custom style element
-            */
+        If close height is value larger than 0, e.g. 36px
+        Then override css library by adding custom style element
+      */
       if (self.closeHeight.lastIndexOf('0', 0) !== 0) {
         var css = [
             '.ackordion[id="',
