@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.0.5
+* Add support for default open tab
+
 ### 1.0.4
 * Support for event callbacks
 
