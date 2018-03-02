@@ -1,6 +1,6 @@
 {
     "name": "ackordion",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "VanillaJS mobile friendly accordion library",
     "main": "src/ackordion.js",
     "scripts": {
