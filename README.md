@@ -78,6 +78,16 @@ Default with toggle aside
 
 ```
 
+
+To start with a default opened tab apply the css class `class="ackordion--active"`
+
+```html
+<li role="tabpanel" class="ackordion--active">
+    ...
+</li>
+```
+
+
 * **ul** is the root component where an id must be provided
 * **li** are the accordion items
 * **button** is the toggle
